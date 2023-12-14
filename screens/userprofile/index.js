@@ -29,8 +29,8 @@ const UserProfileScreen = () => {
   return (
     <View style={styles.container}>
         <View style = {styles.headerpart}>
-         <EvilIcons name='user' size={70} color = {'white'}/>
-         <Text>{username}</Text>
+         <EvilIcons name='user' size={65} color = {'white'} style={styles.icon}/>
+         <Text style={styles.buttonText}>{username}</Text>
         </View>
       <Text style={styles.label}>Name:</Text>
       <TextInput
@@ -40,7 +40,7 @@ const UserProfileScreen = () => {
         editable={isEditing}
       />
 
-      <Text style={styles.label}>Phonenumber:</Text>
+      <Text style={styles.label}>Phone Number:</Text>
       <TextInput
         style={styles.input}
         value={phoneNumber}

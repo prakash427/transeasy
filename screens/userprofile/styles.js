@@ -9,6 +9,9 @@ const styles = StyleSheet.create({
      justifyContent : 'space-between',
      alignItems : 'center'
     },
+    icon : {
+       marginBottom : 10
+    },
     container: {
       flex: 1,
       padding: 16,
@@ -36,6 +39,7 @@ const styles = StyleSheet.create({
     buttonText: {
       color: '#fff',
       fontWeight: 'bold',
+      fontSize : 20
     },
   });
 

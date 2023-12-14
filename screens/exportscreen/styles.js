@@ -86,6 +86,10 @@ const styles = StyleSheet.create({
       justifyContent: 'space-evenly',
       marginTop: 10,
     },
+    errorText : {
+      color : 'red',
+      paddingLeft : 20
+    }
   });
 
   export default styles;

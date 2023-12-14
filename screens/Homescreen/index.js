@@ -6,10 +6,13 @@ import AntDesign from 'react-native-vector-icons/AntDesign'
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons'
 import EvilIcons from 'react-native-vector-icons/EvilIcons'
 import { useNavigation } from '@react-navigation/native';
+import Swiper from 'react-native-swiper';
 
 const HomeScreen = () => { 
    
   const navigation = useNavigation();
+  const [selectedIcon, setSelectedIcon] = useState('home');
+  
   const Profile = () => {
     navigation.navigate('UserProfileScreen')
   }
@@ -30,6 +33,15 @@ const HomeScreen = () => {
     navigation.navigate('ChatScreen')
   }
 
+  const myearnings = () => {
+    navigation.navigate('Myearnings')
+  }
+
+  const history = () => {
+    navigation.navigate('History')
+  }
+
+
   const dummyData = [
     { id: '1', text: 'Flat 20%off', image: require('../assets/cleantech.png')  },
     { id: '2', text: 'Flat 10%off', image: require('../assets/allcountry.png')  },
@@ -39,12 +51,10 @@ const HomeScreen = () => {
   ];
 
   const username = useSelector((state) => state.user.name);
-  const [slideIndex, setSlideIndex] = useState(0);
-
-  const slides = [
-    { id: 1, image: require('../assets/rapidooooo.png') },
-    { id: 2, image: require('../assets/Swiggy-img.png') },
-    { id: 3, image: require('../assets/zomatooo.png') },
+  const images = [
+    require('../assets/rapidooooo.png'),
+    require('../assets/Swiggy-img.png'),
+    require('../assets/zomatooo.png'),
   ];
 
   const renderItem = ({ item }) => (
@@ -56,30 +66,29 @@ const HomeScreen = () => {
     </View>
   );
 
+  const renderBottomBarButton = (iconName, routeName, onPress) => {
+    const isSelected = selectedIcon === iconName;
 
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setSlideIndex((prevIndex) => (prevIndex + 1) % slides.length);
-    }, 3000);
-    return () => clearInterval(interval);
-  }, []);
+    return (
+      <View>
+        <TouchableOpacity
+          style={styles.options}
+          onPress={() => {
+            setSelectedIcon(iconName);
+            onPress();
+          }}
+        >
+          {isSelected ? (
+            <AntDesign style={[styles.oicon, { color: isSelected ? 'white': '#61C9D3' },{ backgroundColor: isSelected ?  '#61C9D3':'white' }]} size={30} name={iconName} />
+          ) : (
+            <AntDesign style={styles.oicon} size={30} name={iconName} />
+          )}
+        </TouchableOpacity>
+        <Text style={[styles.described, { color: isSelected ? '#61C9D3' : 'grey' }]}>{routeName}</Text>
+      </View>
+    );
+  };
 
-  const renderSlide = ({ item, index }) => {
-    return(
-    <Image 
-    source={item.image} 
-    style={styles.slideImage} 
-    resizeMode='cover'  
-    onError={(error) => console.error('Image error:', error.nativeEvent.error)}
-    key={index}/>)
-    };
-
-  const renderDot = (index) => (
-    <View
-      key={index}
-      style={[styles.dot, index === slideIndex ? styles.activeDot : null]}
-    />
-  );
 
   return (
     <>
@@ -90,26 +99,23 @@ const HomeScreen = () => {
         <EvilIcons name='user' size={45} color = {'white'}/>
         </TouchableOpacity>
       </View>   
-      <View style={styles.slideshowContainer}>
-        <FlatList
-          data={slides}
-          renderItem={renderSlide}
-          horizontal
-          pagingEnabled
-          showsHorizontalScrollIndicator={false}
-          keyExtractor={(item) => item.id.toString()}
-          onMomentumScrollEnd={(event) => {
-            const newIndex = Math.round(
-              event.nativeEvent.contentOffset.x /
-                event.nativeEvent.layoutMeasurement.width
-            );
-            setSlideIndex(newIndex);
-          }} 
-        />
-        <View style={styles.dotsContainer}>
-          {slides.map((_, index) => renderDot(index))}
-        </View>
-      </View>  
+       <View style={styles.slidecontainer}>
+      <Swiper
+        style={styles.wrapper}
+        showsButtons={false}
+        autoplay={true}
+        autoplayTimeout={3}
+        paginationStyle={styles.paginationStyle}
+        dotStyle={styles.dotStyle}
+        activeDotStyle={styles.activeDotStyle}
+      >
+        {images.map((image, index) => (
+          <View key={index} style={styles.slide}>
+            <Image source={image} style={styles.image} resizeMode="cover" />
+          </View>
+        ))}
+      </Swiper>
+    </View>
       <View style={styles.flatList}>
       <FlatList
         data={dummyData}
@@ -142,13 +148,19 @@ const HomeScreen = () => {
         <TouchableOpacity style={styles.features} >
         <AntDesign style={styles.icon} size={35} name ='sharealt'/>
         </TouchableOpacity>
-        <Text style={styles.describe}>REFER NOW</Text>
+        <Text style={styles.describe}>REFER&EARN</Text>
         </View>
         <View>
-        <TouchableOpacity style={styles.features}>
+        <TouchableOpacity style={styles.features} onPress={myearnings}>
         <AntDesign style={styles.icon} size={35} name ='gift'/>
         </TouchableOpacity>
         <Text style={styles.describe}>MY EARNINGS</Text>
+        </View>
+        <View>
+        <TouchableOpacity style={styles.features} onPress={wallet}>
+        <AntDesign style={styles.icon} size={40} name ='wallet'/>
+        </TouchableOpacity>
+        <Text style={styles.describe}>WALLET</Text>
         </View>
         <View>
         <TouchableOpacity style={styles.features} onPress={wallet}>
@@ -160,24 +172,27 @@ const HomeScreen = () => {
     </View>
     <View style={styles.bottomBar}>
        <View style={styles.iconRow}>
-        <View>
+        {/* <View>
         <TouchableOpacity style={styles.options}>
          <AntDesign style={styles.oicon} size={30} name ='home'/>
         </TouchableOpacity>
         <Text style={styles.described}>Home</Text>
         </View>
         <View>
-        <TouchableOpacity style={styles.options}>
-        <AntDesign style={styles.oicon} size={30} name ='customerservice' onPress={customercare}/>
+        <TouchableOpacity style={styles.options} onPress={customercare}>
+        <AntDesign style={styles.oicon} size={30} name ='customerservice'/>
         </TouchableOpacity>
         <Text style={styles.described}>HELP</Text>
         </View>
         <View>
-        <TouchableOpacity style={styles.options}>
+        <TouchableOpacity style={styles.options} onPress={history}>
         <MaterialCommunityIcons style={styles.oicon} name="history" size={30} color="white" />
         </TouchableOpacity>
         <Text style={styles.described}>History</Text>
-        </View>
+        </View> */}
+        {renderBottomBarButton('home', 'Home', () => {})}
+          {renderBottomBarButton('customerservice', 'Help', customercare)}
+          {renderBottomBarButton('swap', 'History', history)}
         </View>
   </View>
   </>

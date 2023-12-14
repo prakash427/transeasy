@@ -17,37 +17,42 @@ const styles = StyleSheet.create({
         fontWeight : 'bold',
         fontSize : 20,
     },
-    slideshowContainer: {
-        width: '85%', 
-        aspectRatio:2.3, 
-        overflow: 'hidden',
-        alignSelf: 'center',
-        borderRadius: 30, 
-        marginVertical: 20, 
-      },
-      slideImage: {
-        width: 335,
-        height: '100%',
-        borderRadius: 20,
-        resizeMode: 'cover',
-        
-      },
-      dotsContainer: {
-        position: 'absolute',
-        bottom: 20,
-        flexDirection: 'row',
-        alignSelf: 'center',
-      },
-      dot: {
-        width: 8,
-        height: 8,
-        borderRadius: 4,
-        backgroundColor: '#ccc',
-        marginHorizontal: 5,
-      },
-      activeDot: {
-        backgroundColor: 'white',
-      },
+    slidecontainer: {
+      width: '90%',
+      height: 150,
+      alignSelf: 'center',
+      marginTop: 10,
+    },
+    wrapper: {},
+    slide: {
+      flex: 1,
+      justifyContent: 'center',
+      alignItems: 'center',
+    },
+    image: {
+      width: '100%',
+      height: '100%',
+      borderRadius: 8,
+    },
+    paginationStyle: {
+      bottom: 10,
+    },
+    dotStyle: {
+      width: 8,
+      height: 8,
+      borderRadius: 4,
+      backgroundColor: 'rgba(255,255,255,.4)',
+      marginLeft: 3,
+      marginRight: 3,
+    },
+    activeDotStyle: {
+      width: 12,
+      height: 12,
+      borderRadius: 6,
+      backgroundColor: 'white',
+      marginLeft: 3,
+      marginRight: 3,
+    },
       itemImage : {
         height : 150,
         borderRadius : 5,
@@ -92,7 +97,14 @@ const styles = StyleSheet.create({
       },
       bottomBar: {
         backgroundColor: 'white',
-        padding: 10,
+        padding: 2,
+        borderWidth: 1, 
+        borderColor: '#ddd', 
+        shadowColor: '#000', 
+        shadowOffset: { width: 0, height: 2 },
+        shadowOpacity: 0.2,
+        shadowRadius: 4,
+        elevation: 3,
       },
       bottomBarText: {
         color: '#61C9D3',
@@ -107,6 +119,8 @@ const styles = StyleSheet.create({
       },
       oicon:{
         color : '#61C9D3',
+        padding : 15,
+        borderRadius : 10
       },
       described : {
         alignSelf : 'center',

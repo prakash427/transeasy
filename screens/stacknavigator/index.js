@@ -14,6 +14,8 @@ import ItemDetailsScreen from '../checkoutscreen';
 import Paymentslist from '../paymenyscreen';
 import Wallet from '../wallet';
 import ChatScreen from '../customerservice';
+import Myearnings from '../myearnings';
+import History from '../History';
 
 const Stack = createStackNavigator();
 
@@ -33,6 +35,8 @@ const StackNavigator = () => {
           <Stack.Screen name="Paymentslist" component={Paymentslist} options={{headerShown:false}}/>
           <Stack.Screen name="Wallet" component={Wallet} options={{headerShown:false}}/>
           <Stack.Screen name="ChatScreen" component={ChatScreen} options={{headerShown:false}}/>
+          <Stack.Screen name="Myearnings" component={Myearnings} options={{headerShown:false}}/>
+          <Stack.Screen name="History" component={History} options={{headerShown:false}}/>
     </Stack.Navigator>
   );
 };
