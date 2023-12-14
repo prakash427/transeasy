@@ -1,17 +1,43 @@
 import React, {useEffect, useState} from 'react';
-import { View, Text, FlatList, Image, TouchableOpacity } from 'react-native';
-import { useSelector, connect } from 'react-redux';
+import { View, Text, FlatList, Image, TouchableOpacity, PermissionsAndroid } from 'react-native';
+import { useSelector } from 'react-redux';
 import styles from './styles';
 import AntDesign from 'react-native-vector-icons/AntDesign'
-import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons'
 import EvilIcons from 'react-native-vector-icons/EvilIcons'
 import { useNavigation } from '@react-navigation/native';
 import Swiper from 'react-native-swiper';
+
 
 const HomeScreen = () => { 
    
   const navigation = useNavigation();
   const [selectedIcon, setSelectedIcon] = useState('home');
+
+  const requestLocationPermission = async () => {
+    try {
+      const granted = await PermissionsAndroid.request(
+        PermissionsAndroid.PERMISSIONS.ACCESS_FINE_LOCATION,
+        {
+          title: 'Location Permission',
+          message: 'We need your location to show available delivery places.',
+          buttonPositive: 'OK',
+        }
+      );
+      if (granted === PermissionsAndroid.RESULTS.GRANTED) {
+        console.log('Location permission granted');
+      } else {
+        console.log('Location permission denied');
+        Alert.alert('Permission Denied', 'Please enable location permission to use this feature.');
+      }
+    } catch (err) {
+      console.warn('Permission request error:', err);
+    }
+  };
+
+  useEffect(() => {
+    requestLocationPermission();
+  }, []);
+  
   
   const Profile = () => {
     navigation.navigate('UserProfileScreen')
@@ -148,7 +174,7 @@ const HomeScreen = () => {
         <TouchableOpacity style={styles.features} >
         <AntDesign style={styles.icon} size={35} name ='sharealt'/>
         </TouchableOpacity>
-        <Text style={styles.describe}>REFER&EARN</Text>
+        <Text style={styles.describe}>REFER</Text>
         </View>
         <View>
         <TouchableOpacity style={styles.features} onPress={myearnings}>
@@ -162,34 +188,10 @@ const HomeScreen = () => {
         </TouchableOpacity>
         <Text style={styles.describe}>WALLET</Text>
         </View>
-        <View>
-        <TouchableOpacity style={styles.features} onPress={wallet}>
-        <AntDesign style={styles.icon} size={40} name ='wallet'/>
-        </TouchableOpacity>
-        <Text style={styles.describe}>WALLET</Text>
-        </View>
       </View>
     </View>
     <View style={styles.bottomBar}>
        <View style={styles.iconRow}>
-        {/* <View>
-        <TouchableOpacity style={styles.options}>
-         <AntDesign style={styles.oicon} size={30} name ='home'/>
-        </TouchableOpacity>
-        <Text style={styles.described}>Home</Text>
-        </View>
-        <View>
-        <TouchableOpacity style={styles.options} onPress={customercare}>
-        <AntDesign style={styles.oicon} size={30} name ='customerservice'/>
-        </TouchableOpacity>
-        <Text style={styles.described}>HELP</Text>
-        </View>
-        <View>
-        <TouchableOpacity style={styles.options} onPress={history}>
-        <MaterialCommunityIcons style={styles.oicon} name="history" size={30} color="white" />
-        </TouchableOpacity>
-        <Text style={styles.described}>History</Text>
-        </View> */}
         {renderBottomBarButton('home', 'Home', () => {})}
           {renderBottomBarButton('customerservice', 'Help', customercare)}
           {renderBottomBarButton('swap', 'History', history)}

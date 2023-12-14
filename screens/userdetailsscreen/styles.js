@@ -38,7 +38,22 @@ const styles = StyleSheet.create({
     errormessage : {
         color : 'red',
         paddingBottom : 5
-    }
+    },
+    googleSignInButton :{
+      width : 200,
+      height : 50,
+      alignSelf : 'center'
+    },
+    image :{
+      alignSelf : 'center'
+    },
+    ortext :{
+      alignSelf : 'center',
+      padding : 20,
+      fontWeight : 'bold',
+      color : 'black'
+    },
+    
   });
 
   export default styles;

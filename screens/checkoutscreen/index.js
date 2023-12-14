@@ -1,6 +1,6 @@
 
 import React, { useState, useEffect } from 'react';
-import { View, Text, StyleSheet, Image, TouchableOpacity, TextInput } from 'react-native';
+import { View, Text, Image, TouchableOpacity, TextInput } from 'react-native';
 import { useSelector } from 'react-redux';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons'
 import { useNavigation } from '@react-navigation/native';

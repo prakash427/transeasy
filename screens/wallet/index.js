@@ -1,6 +1,5 @@
 import React from 'react';
-import { View, Text, StyleSheet, FlatList, Image } from 'react-native';
-import { SearchBar, ListItem } from 'react-native-elements';
+import { View, Text } from 'react-native';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import styles from './styles';
 import { useNavigation } from '@react-navigation/native';

@@ -3,7 +3,7 @@ import React, { useState, useEffect } from 'react';
 import { GiftedChat, Bubble } from 'react-native-gifted-chat';
 import { View, Text, FlatList, Image, TouchableOpacity, StyleSheet, ImageBackground } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
-import CustomInputToolbar from './custominput';
+import styles from './styles';
 
 const ChatScreen = () => {
 
@@ -28,7 +28,7 @@ const ChatScreen = () => {
 
   const generateChatbotResponse = (userMessages) => {
     const lastUserMessage = userMessages[0].text.toLowerCase();
-    // const lastUserMessage = userMessages[0]?.text?.toLowerCase() || '';
+  
     
     if (lastUserMessage.includes('hi')) {
       return [
@@ -106,10 +106,10 @@ const ChatScreen = () => {
       <Bubble
         {...props}
         textStyle={{
-          left: { color: 'white' }, // Customize the text color for the bot's messages
+          left: { color: 'white' }, 
         }}
         wrapperStyle={{
-          left: { backgroundColor: '#61C9D3' }, // Customize the background color for the bot's messages
+          left: { backgroundColor: '#61C9D3' }, 
         }}
       />
        {additionalComponents && (
@@ -122,9 +122,9 @@ const ChatScreen = () => {
               const newMessages = [
                 {
                   _id: Math.random(),
-                  text: 'hello', // Simulate sending a message with content "hi"
+                  text: 'hello', 
                   createdAt: new Date(),
-                  user: { _id: 2 }, // User ID
+                  user: { _id: 2 },
                 },
               ];
               onSend(newMessages);
@@ -152,25 +152,11 @@ const ChatScreen = () => {
       user={{ _id: 2 }}
       renderAvatar={(props) => renderAvatar(props)}
       renderBubble={(props) => renderBubble(props)}
-      // renderInputToolbar={(toolbarProps) => <CustomInputToolbar {...toolbarProps} />}
-       //inverted={false}
      />
      </View>
     </ImageBackground>
   );
 };
-
-const styles = StyleSheet.create({
-  backgroundImage: {
-    flex: 1,
-    resizeMode: 'cover', // or 'stretch' for different stretch modes
-  },
-  chatContainer: {
-    flex: 1,
-    backgroundColor: 'rgba(255, 255, 255, 0.5)', // Adjust the opacity or color as needed
-
-  },
-});
 
 
 export default ChatScreen;

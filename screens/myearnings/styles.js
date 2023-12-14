@@ -45,7 +45,6 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     flexDirection: 'row',
     gap: 5,
-    //justifyContent : 'space-between'
   },
   Headertext: {
     color: 'white',
@@ -102,7 +101,6 @@ const styles = StyleSheet.create({
       shadowOpacity: 0.2,
       shadowRadius: 4,
       elevation: 3, 
-      //paddingHorizontal : 135
   },
   rewardstext : {
     color : 'black',

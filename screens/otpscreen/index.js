@@ -1,5 +1,5 @@
 import React, { useState, useRef } from 'react';
-import { View, Text, Image, TextInput, TouchableOpacity, StyleSheet, Alert } from 'react-native';
+import { View, Text, Image, TextInput, TouchableOpacity,  Alert } from 'react-native';
 import AntDesign from 'react-native-vector-icons/AntDesign';
 import styles from './styles'
 import { useNavigation } from '@react-navigation/native';
@@ -10,7 +10,7 @@ const OTPScreen = () => {
 
   const navigation = useNavigation();
     const LOCATION = () => {
-        navigation.navigate('LocationScreen'); 
+        navigation.navigate('HomeScreen'); 
       };
 
   const handleOTPChange = (text, index) => {

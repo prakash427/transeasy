@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "1085204628340",
+    "project_id": "transeasy-784d1",
+    "storage_bucket": "transeasy-784d1.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1085204628340:android:ae7b84adc6532ee975e221",
+        "android_client_info": {
+          "package_name": "com.transeasy"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1085204628340-4sg23hs3v52nlp22scbhmv0qe8oqnlh9.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.transeasy",
+            "certificate_hash": "5e8f16062ea3cd2c4a0d547876baa6f38cabf625"
+          }
+        },
+        {
+          "client_id": "1085204628340-3gjjc8tv85fhrg0ffq630krm6badc8sr.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB_ukeuipSRokbq2KZHp9eUfiwALhaS0Eg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1085204628340-3gjjc8tv85fhrg0ffq630krm6badc8sr.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

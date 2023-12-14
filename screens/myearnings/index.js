@@ -1,8 +1,8 @@
 
 import React from 'react';
-import { View, Image, StyleSheet, Dimensions, Text, TouchableOpacity, FlatList } from 'react-native';
+import { View, Image, Text, TouchableOpacity, FlatList } from 'react-native';
 import Swiper from 'react-native-swiper';
-import { SearchBar, ListItem } from 'react-native-elements';
+import {  ListItem } from 'react-native-elements';
 import EvilIcons from 'react-native-vector-icons/EvilIcons';
 import { useNavigation } from '@react-navigation/native';
 import styles from './styles';

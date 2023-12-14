@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, View, Text, TouchableOpacity } from 'react-native';
+import {  View, Text, TouchableOpacity } from 'react-native';
 import Video from 'react-native-video';
 import styles from './style';
 import { useNavigation } from '@react-navigation/native'; 
