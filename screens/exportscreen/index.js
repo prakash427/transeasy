@@ -1,19 +1,19 @@
 
 import React, { useState } from 'react';
-import { View, Text, TextInput, Image, StyleSheet, TouchableOpacity, ScrollView } from 'react-native';
+import { View, Text, TextInput, Image, TouchableOpacity, ScrollView } from 'react-native';
 import ImagePicker from 'react-native-image-crop-picker';
 import { launchCamera } from 'react-native-image-picker';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import styles from './styles'
 import { useNavigation } from '@react-navigation/native';
 import { useDispatch } from 'react-redux';
-import { setProduct, setProductDimensions } from '../redux/action';
+import { setProduct, setProductDimensions, setImage } from '../redux/action';
 
 const ExportScreen = () => {
   const dispatch = useDispatch();
   const [productName, setProductName] = useState('');
   const [dimensions, setDimensions] = useState('');
-  const [image, setImage] = useState('');
+  // const [image, setImage] = useState('');
   const [receiverName, setReceiverName] = useState('');
   const [mobileNumber, setMobileNumber] = useState('');
   const [address, setAddress] = useState('');
@@ -25,6 +25,7 @@ const ExportScreen = () => {
     receiverName: '',
     mobileNumber: '',
     address: '',
+    image :''
   });
 
   const journeyIcons = [
@@ -42,14 +43,15 @@ const ExportScreen = () => {
       receiverName: receiverName.trim() ? '' : 'Receiver Name is required',
       mobileNumber: mobileNumber.trim() ? '' : 'Mobile Number is required',
       address: address.trim() ? '' : 'Address is required',
+      image: selectedImage ? '' : 'Image is required',
     };
-
+    console.log('newErrors:', newErrors);
     setErrors(newErrors);
 
     if (Object.values(newErrors).every(error => !error)) {
-      // No errors, proceed with navigation
       dispatch(setProduct(productName));
       dispatch(setProductDimensions(dimensions));
+      dispatch(setImage(selectedImage.uri));
       navigation.navigate('Transportslist');
     }
   };
@@ -66,7 +68,7 @@ const ExportScreen = () => {
     })
       .then(image => {
         console.log(image);
-        setSelectedImage({ uri: image.path });
+        setSelectedImage({ uri: image.path, isVisible: true });
       })
       .catch(error => {
         console.log(error);
@@ -85,10 +87,14 @@ const ExportScreen = () => {
       } else if (response.error) {
         console.log('Camera Error: ', response.error);
       } else if (response.uri) {
-        setSelectedImage({ uri: response.uri });
+        setSelectedImage({ uri: response.uri, isVisible: true });
       }
     });
   };
+  const removeImage = () => {
+    setSelectedImage(null);
+  };
+
 
   const renderJourneyIcon = item => (
     <TouchableOpacity
@@ -137,8 +143,18 @@ const ExportScreen = () => {
             <TouchableOpacity onPress={openCamera} style={styles.button}>
               <Text style={styles.buttonText}>Open Camera</Text>
             </TouchableOpacity>
-            {selectedImage && <Image source={selectedImage} style={styles.selectedImage} />}
+            <TouchableOpacity>
+             {selectedImage && selectedImage.isVisible ? (
+              <View>
+                 <TouchableOpacity onPress={removeImage} style={styles.removeImageButton}>
+                  <Icon name="close" size={20} color="white"/>
+                </TouchableOpacity>
+                <Image source={selectedImage} style={styles.selectedImage} />
+              </View>
+            ) : null}  
+            </TouchableOpacity>
           </View>
+          {renderError('image')}
         </View>
 
         <View style={styles.sectionContainer}>

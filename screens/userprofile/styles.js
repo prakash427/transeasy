@@ -35,12 +35,52 @@ const styles = StyleSheet.create({
       padding: 12,
       borderRadius: 8,
       alignItems: 'center',
+      margin : 10
     },
     buttonText: {
       color: '#fff',
       fontWeight: 'bold',
       fontSize : 20
     },
+       modalContainer: {
+      flex: 1,
+      justifyContent: 'center',
+      alignItems: 'center',
+      backgroundColor: 'rgba(0, 0, 0, 0.5)', 
+    },
+  
+    modalContent: {
+      width: '80%',
+      backgroundColor: 'white',
+      padding: 30,
+      borderRadius: 10,
+      borderWidth : 5,
+      borderColor : '#61C9D3'
+    },
+  
+    modalText: {
+      fontSize: 18,
+      marginBottom: 10,
+      textAlign: 'center',
+    },
+  
+    modalButtons: {
+      flexDirection: 'row',
+      justifyContent: 'space-around',
+      marginTop: 20
+    },
+  
+    modalButtonText: {
+      color: 'white',
+      fontSize: 16,
+      fontWeight : 'bold'
+    },
+
+    alertnuttons : {
+      backgroundColor : '#61C9D3',
+      padding : 10,
+      borderRadius : 5
+    }
   });
 
   export default styles

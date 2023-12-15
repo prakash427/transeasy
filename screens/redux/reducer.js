@@ -1,7 +1,7 @@
 // reducers.js
 import { combineReducers } from 'redux';
 
-const userReducer = (state = { name: '', phoneNumber: '',productName:'',dimensions:'' }, action) => {
+const userReducer = (state = { name: '', phoneNumber: '',productName:'',dimensions:'',image: null }, action) => {
   switch (action.type) {
     case 'SET_USER_NAME':
       return { ...state, name: action.payload };
@@ -11,6 +11,8 @@ const userReducer = (state = { name: '', phoneNumber: '',productName:'',dimensio
       return{...state,productName : action.payload} ;
       case 'SET_PRODUCT_DIMENSIONS' :
       return{...state,dimensions : action.payload} ;  
+      case 'SET_IMAGE':
+      return { ...state, image: action.payload };
     default:
       return state;
   }

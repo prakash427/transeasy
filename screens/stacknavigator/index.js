@@ -5,7 +5,6 @@ import BackgroundVideo from '../welcomescreen';
 import UserDetailsScreen from '../userdetailsscreen';
 import HomeScreen from '../Homescreen';
 import OTPScreen from '../otpscreen';
-import LocationScreen from '../Locationscreen';
 import UserProfileScreen from '../userprofile';
 import ExportScreen from '../exportscreen';
 import ImportScreen from '../importscreen';
@@ -25,7 +24,6 @@ const StackNavigator = () => {
           <Stack.Screen name="BackgroundVideo" component={BackgroundVideo} options={{ headerShown: false }}/>
           <Stack.Screen name="UserDetailsScreen" component={UserDetailsScreen} options={{ headerShown: false }}/>
           <Stack.Screen name="OTPScreen" component={OTPScreen} options={{ headerShown: false }}/>
-          <Stack.Screen name="LocationScreen" component={LocationScreen} options={{ headerShown: false }}/>
           <Stack.Screen name="HomeScreen" component={HomeScreen} options={{ headerShown: false }}/> 
           <Stack.Screen name="UserProfileScreen" component={UserProfileScreen} options={{ headerShown: false }}/>
           <Stack.Screen name="ExportScreen" component={ExportScreen} options={{ headerShown: false }}/>

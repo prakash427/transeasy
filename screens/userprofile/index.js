@@ -1,15 +1,18 @@
 
 import React, { useState, useEffect } from 'react';
-import { View, Text, TextInput, TouchableOpacity } from 'react-native';
+import { View, Text, TextInput, TouchableOpacity, Modal, Alert } from 'react-native';
 import { setUserName, setUserPhoneNumber } from '../redux/action';
 import EvilIcons from 'react-native-vector-icons/EvilIcons';
 import { useSelector, useDispatch } from 'react-redux';
 import styles from './styles';
+import { useNavigation } from '@react-navigation/native';
 
 const UserProfileScreen = () => {
   const dispatch = useDispatch();
   const [isEditing, setEditing] = useState(false);
   const [label, setLabel] = useState(false);
+  const [logoutModalVisible, setLogoutModalVisible] = useState(false);
+  const navigation = useNavigation();
 
   const username = useSelector((state) => state.user.name);
   const phonenumber = useSelector((state) => state.user.phoneNumber);
@@ -34,6 +37,16 @@ const UserProfileScreen = () => {
     dispatch(setUserPhoneNumber(phoneNumber));
     console.log('dispatched', name);
     setEditing(false);
+  };
+
+  const handleLogoutPress = () => {
+    setLogoutModalVisible(true);
+  };
+
+  const handleLogout = () => {
+    console.log('Logging out...');
+    setLogoutModalVisible(false);
+    navigation.navigate('UserDetailsScreen')
   };
 
   return (
@@ -63,13 +76,40 @@ const UserProfileScreen = () => {
           <Text style={styles.buttonText}>Save</Text>
         </TouchableOpacity>
       ) : (
-        <TouchableOpacity style={styles.button} onPress={handleEditPress}>
-          <Text style={styles.buttonText}>Edit</Text>
-        </TouchableOpacity>
+        <>
+          <TouchableOpacity style={styles.button} onPress={handleEditPress}>
+            <Text style={styles.buttonText}>Edit</Text>
+          </TouchableOpacity>
+          <TouchableOpacity style={styles.button} onPress={handleLogoutPress}>
+            <Text style={styles.buttonText}>Logout</Text>
+          </TouchableOpacity>
+        </>
       )}
+
+      <Modal
+        animationType="slide"
+        transparent={true}
+        visible={logoutModalVisible}
+        onRequestClose={() => setLogoutModalVisible(false)}
+      >
+        <View style={styles.modalContainer}>
+          <View style={styles.modalContent}>
+            <Text style={styles.modalText}>Are you sure you want to logout?</Text>
+            <View style={styles.modalButtons}>
+              <TouchableOpacity onPress={() => setLogoutModalVisible(false)} style = {styles.alertnuttons}>
+                <Text style={styles.modalButtonText}>Close</Text>
+              </TouchableOpacity>
+              <TouchableOpacity onPress={handleLogout} style = {styles.alertnuttons}>
+                <Text style={styles.modalButtonText}>Logout</Text>
+              </TouchableOpacity>
+            </View>
+          </View>
+        </View>
+      </Modal>
     </View>
   );
 };
 
 export default UserProfileScreen;
+
 

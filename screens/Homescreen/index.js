@@ -6,12 +6,28 @@ import AntDesign from 'react-native-vector-icons/AntDesign'
 import EvilIcons from 'react-native-vector-icons/EvilIcons'
 import { useNavigation } from '@react-navigation/native';
 import Swiper from 'react-native-swiper';
+import  Share  from 'react-native-share';
 
 
 const HomeScreen = () => { 
    
   const navigation = useNavigation();
   const [selectedIcon, setSelectedIcon] = useState('home');
+
+  const share = async () => {
+    const options = {
+      message: "Hey"
+
+    };
+
+    try {
+      const res = await Share.open(options);
+      console.log(res);
+    } catch (err) {
+      console.log(err);
+    }
+
+  };
 
   const requestLocationPermission = async () => {
     try {
@@ -171,7 +187,7 @@ const HomeScreen = () => {
         <Text style={styles.describe}>IMPORT</Text>
         </View>
         <View>
-        <TouchableOpacity style={styles.features} >
+        <TouchableOpacity style={styles.features} onPress={share}>
         <AntDesign style={styles.icon} size={35} name ='sharealt'/>
         </TouchableOpacity>
         <Text style={styles.describe}>REFER</Text>

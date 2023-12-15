@@ -4,13 +4,15 @@ import { View, Text, Image, TouchableOpacity, TextInput } from 'react-native';
 import { useSelector } from 'react-redux';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons'
 import { useNavigation } from '@react-navigation/native';
-import styles from './syles'
+import styles from './syles';
+import BillText from './BillText';
 
 const ItemDetailsScreen = ({ route }) => {
   const navigation = useNavigation();
-  const { title, rating, number, originalPrice, discountPrice, offer, image } = route.params;
+  const { title, rating, number, discountPrice, image } = route.params;
   const product = useSelector((state)=>state.user.productName)
   const dimensions = useSelector((state)=>state.user.dimensions)
+  const { image: reduxImage } = useSelector((state) => state.user);
   const[email, setEmail] = useState('')
   const [totalAmount, setTotalAmount] = useState(0);
   const deliveryAgentFee = 350
@@ -47,13 +49,18 @@ useEffect(() => {
         <Text style={styles.billtext}>Apply Coupon</Text>
         <MaterialCommunityIcons name = 'ticket-percent' size={30}/>
       </TouchableOpacity>
+      <View style = {styles.productimage}>
+      {reduxImage && <Image source={{ uri: reduxImage }} style={{ width: 200, height: 200 }} />}
+
+    </View>
       <View style={styles.bill}>
-        <Text style={styles.billtext}>Product Name : {product}</Text>
-        <Text style={styles.billtext}>Product Dimensions :  {dimensions}</Text>
-        <Text style={styles.billtext}>Transport Services : ₹{discountPrice} </Text>
-        <Text style={styles.billtext}>Delivery Agent Fee : ₹{deliveryAgentFee} </Text>
-        <Text style={styles.billtext}>Platform Fee : ₹{platformFee}</Text>
+        <BillText label="Product Name" value={product} />
+        <BillText label="Product Dimensions" value={dimensions} />
+        <BillText label="Transport Services" value={`₹${discountPrice}`} />
+        <BillText label="Delivery Agent Fee" value={`₹${deliveryAgentFee}`} />
+        <BillText label="Platform Fee" value={`₹${platformFee}`} />
       </View>
+
       <View style={styles.coupon}>
         <Text style={styles.billtext}>Total Amount</Text>
         <Text> ₹{totalAmount}</Text>

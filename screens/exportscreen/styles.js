@@ -89,6 +89,12 @@ const styles = StyleSheet.create({
     errorText : {
       color : 'red',
       paddingLeft : 20
+    },
+    removeImageButton : {
+      backgroundColor : '#61C9D3',
+      width : 20,
+      borderRadius : 10,
+
     }
   });
 
