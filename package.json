@@ -31,6 +31,7 @@
     "react-native-screens": "^3.27.0",
     "react-native-shadow-cards": "^1.0.2",
     "react-native-share": "^10.0.2",
+    "react-native-splash-screen": "^3.3.0",
     "react-native-swiper": "^1.6.0",
     "react-native-vector-icons": "^10.0.2",
     "react-native-video": "^5.2.1",

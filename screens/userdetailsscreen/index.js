@@ -35,6 +35,11 @@ const UserDetailsScreen = ({ navigation }) => {
       await auth().signInWithCredential(googleCredential);
       dispatch(setUserName(user.name))
       dispatch(setUserPhoneNumber(user.email));
+      console.log('dispatched', user.name);
+      await AsyncStorage.setItem('isLoggedIn','true');
+      await AsyncStorage.setItem('name',user.name)
+      await AsyncStorage.setItem('phone',user.email)
+      console.log('isLoggedIn set to true');
       navigation.navigate('HomeScreen');
 
       console.log('Signed in with Google!');
@@ -56,7 +61,10 @@ const UserDetailsScreen = ({ navigation }) => {
       dispatch(setUserName(name));
       dispatch(setUserPhoneNumber(phoneNumber));
       console.log('dispatched', name);
-      await AsyncStorage.setItem('isLoggedIn', 'true');
+      await AsyncStorage.setItem('isLoggedIn','true');
+      await AsyncStorage.setItem('name',name)
+      await AsyncStorage.setItem('phone',phoneNumber)
+      console.log('isLoggedIn set to true'); 
       OTP();
     } catch (error) {
       console.error('AsyncStorage Error:', error);

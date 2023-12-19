@@ -16,14 +16,14 @@ import ChatScreen from '../customerservice';
 import Myearnings from '../myearnings';
 import History from '../History';
 import Applycoupon from '../applycoupon';
-import SplashScreen from '../splashscreen/splashscreen';
+import SplashScreenn from '../splashscreen/splashscreen';
 
 const Stack = createStackNavigator();
 
 const StackNavigator = () => {
   return (
-    <Stack.Navigator initialRouteName="SplashScreen">
-           <Stack.Screen name="SplashScreen" component={SplashScreen} options={{ headerShown: false }} />
+    <Stack.Navigator initialRouteName="SplashScreenn">
+           <Stack.Screen name="SplashScreenn" component={SplashScreenn} options={{ headerShown: false }} />
           <Stack.Screen name="BackgroundVideo" component={BackgroundVideo} options={{ headerShown: false }}/>
           <Stack.Screen name="UserDetailsScreen" component={UserDetailsScreen} options={{ headerShown: false }}/>
           <Stack.Screen name="OTPScreen" component={OTPScreen} options={{ headerShown: false }}/>
