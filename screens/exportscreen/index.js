@@ -4,6 +4,8 @@ import { View, Text, TextInput, Image, TouchableOpacity, ScrollView } from 'reac
 import ImagePicker from 'react-native-image-crop-picker';
 import { launchCamera } from 'react-native-image-picker';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
+import EvilIcons from 'react-native-vector-icons/EvilIcons';
+import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import styles from './styles'
 import { useNavigation } from '@react-navigation/native';
 import { useDispatch } from 'react-redux';
@@ -13,7 +15,6 @@ const ExportScreen = () => {
   const dispatch = useDispatch();
   const [productName, setProductName] = useState('');
   const [dimensions, setDimensions] = useState('');
-  // const [image, setImage] = useState('');
   const [receiverName, setReceiverName] = useState('');
   const [mobileNumber, setMobileNumber] = useState('');
   const [address, setAddress] = useState('');
@@ -113,10 +114,17 @@ const ExportScreen = () => {
   );
 
   return (
-    <ScrollView>
       <View style={styles.container}>
-        <Text style={styles.mainHeading}>Enter Product Details</Text>
-
+       <View style={styles.mainHeading}> 
+        <View style={styles.back}>
+         <TouchableOpacity onPress={()=>{navigation.navigate('HomeScreen')}}>
+           <EvilIcons name='chevron-left' size={38} color={'white'} /> 
+         </TouchableOpacity> 
+         <Text style={styles.Headertext}>Go Back</Text>
+        </View>
+        <Text style={styles.Headertext} marginLeft = {10}>Enter Product Details</Text>
+       </View>
+        <ScrollView>
         <View style={styles.sectionContainer}>
           <Text style={styles.subHeading}>Product Details</Text>
 
@@ -137,13 +145,17 @@ const ExportScreen = () => {
           {renderError('dimensions')}
 
           <View>
+            <View style={styles.back}>
             <TouchableOpacity onPress={openGallery} style={styles.button}>
-              <Text style={styles.buttonText}>Open Gallery</Text>
+              <Text style={styles.buttonText}>Gallery</Text>
+              <MaterialIcons name='photo-library' size={30} color={'white'} /> 
             </TouchableOpacity>
             <TouchableOpacity onPress={openCamera} style={styles.button}>
-              <Text style={styles.buttonText}>Open Camera</Text>
+              <Text style={styles.buttonText}>Camera</Text>
+              <MaterialIcons name='photo-camera' size={30} color={'white'} />
             </TouchableOpacity>
-            <TouchableOpacity>
+            </View>
+            <TouchableOpacity style={styles.imageplace}>
              {selectedImage && selectedImage.isVisible ? (
               <View>
                  <TouchableOpacity onPress={removeImage} style={styles.removeImageButton}>
@@ -155,9 +167,9 @@ const ExportScreen = () => {
             </TouchableOpacity>
           </View>
           {renderError('image')}
-        </View>
+        {/* </View>
 
-        <View style={styles.sectionContainer}>
+        <View style={styles.sectionContainer}> */}
           <Text style={styles.subHeading}>Receiver Details</Text>
 
           <TextInput
@@ -184,16 +196,18 @@ const ExportScreen = () => {
             onChangeText={text => setAddress(text)}
           />
           {renderError('address')}
-        </View>
+        {/* </View> */}
 
         <Text style={styles.subHeading}>Select Vehicle</Text>
-        <View style={styles.journeyIconsContainer}>{journeyIcons.map(renderJourneyIcon)}</View>
-
+        <View style={styles.journeyIconsContainer}>
+          {journeyIcons.map(renderJourneyIcon)}
+          </View>
+          </View>
+          </ScrollView>
         <TouchableOpacity onPress={validateInputs} style={styles.confirmLocationButton}>
           <Text style={styles.buttonText}>Select Transport Service</Text>
         </TouchableOpacity>
       </View>
-    </ScrollView>
   );
 };
 

@@ -1,5 +1,6 @@
 import React, {useEffect, useState} from 'react';
-import { View, Text, FlatList, Image, TouchableOpacity, PermissionsAndroid } from 'react-native';
+import { View, Text, FlatList, Image, TouchableOpacity, PermissionsAndroid, Modal} from 'react-native';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useSelector } from 'react-redux';
 import styles from './styles';
 import AntDesign from 'react-native-vector-icons/AntDesign'
@@ -7,16 +8,27 @@ import EvilIcons from 'react-native-vector-icons/EvilIcons'
 import { useNavigation } from '@react-navigation/native';
 import Swiper from 'react-native-swiper';
 import  Share  from 'react-native-share';
+import { setUserName } from '../redux/action';
+import { useDispatch } from 'react-redux';
+import { connect } from 'react-redux';
+
 
 
 const HomeScreen = () => { 
    
   const navigation = useNavigation();
   const [selectedIcon, setSelectedIcon] = useState('home');
+  const [modal, setModal] = useState(false)
+  const dispatch = useDispatch();
+
+  const handleModal = () => {
+    navigation.navigate('Paymentslist')
+    setModal(false);
+  };
 
   const share = async () => {
     const options = {
-      message: "Hey"
+      message: "Hey I'm using this 'TRANSEASY' app which saves our time and reduce our efforts while we transport products from one place to another "
 
     };
 
@@ -68,7 +80,7 @@ const HomeScreen = () => {
   }
 
   const wallet = () => {
-    navigation.navigate('Wallet')
+    setModal(true);
   }
 
   const customercare = () => {
@@ -82,7 +94,6 @@ const HomeScreen = () => {
   const history = () => {
     navigation.navigate('History')
   }
-
 
   const dummyData = [
     { id: '1', text: 'Flat 20%off', image: require('../assets/cleantech.png')  },
@@ -110,6 +121,10 @@ const HomeScreen = () => {
 
   const renderBottomBarButton = (iconName, routeName, onPress) => {
     const isSelected = selectedIcon === iconName;
+
+    // useEffect(() => {
+    //   dispatch(setUserName(user.name));
+    // }, []);
 
     return (
       <View>
@@ -213,10 +228,37 @@ const HomeScreen = () => {
           {renderBottomBarButton('swap', 'History', history)}
         </View>
   </View>
+  <Modal
+        animationType="slide"
+        transparent={true}
+        visible={modal}
+        onRequestClose={() => setModal(false)}
+      >
+        <View style={styles.modalContainer}>
+          <View style={styles.modalContent}>
+            <View style={styles.heading}>
+              <Text style={styles.headingtext}>Your Wallet</Text>
+            </View>
+            <View style={styles.wallet}>
+               <AntDesign style={styles.icon} size={40} name ='wallet'/>
+            <Text style={styles.money}>₹0</Text>
+            </View>
+            <TouchableOpacity style={styles.addmoney} onPress={handleModal}>
+               <Text style={styles.addmoneytext}>Add Money</Text>
+            </TouchableOpacity>
+          </View>
+        </View>
+      </Modal>
   </>
   );
 };
 
 
-export default HomeScreen;
+// export default HomeScreen;
 
+const mapStateToProps = (state) => ({
+  username: state.user.name,
+  // other props from Redux state
+});
+
+export default connect(mapStateToProps)(HomeScreen);
