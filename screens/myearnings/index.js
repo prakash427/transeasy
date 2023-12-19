@@ -15,7 +15,7 @@ const home = () => {
 }
 
   const images = [
-    require('../assets/rapidooooo.png'),
+    require('../assets/KFC.jpg'),
     require('../assets/dominos.jpg'),
     require('../assets/myntra.jpg'),
   ];

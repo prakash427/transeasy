@@ -1,5 +1,5 @@
-import React from 'react';
-import { View, Text } from 'react-native';
+import React, { useState } from 'react';
+import { View, Text, Modal } from 'react-native';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import styles from './styles';
 import { useNavigation } from '@react-navigation/native';
@@ -7,6 +7,7 @@ import AntDesign from 'react-native-vector-icons/AntDesign'
 
 const Wallet = () => {
     const navigation = useNavigation();
+    const[modal, setModal] = useState(false)
     const payment = () => {
         navigation.navigate('Paymentslist')
       }

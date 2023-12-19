@@ -3,22 +3,39 @@ import { StyleSheet } from "react-native";
 const styles = StyleSheet.create({
     container: {
       flex: 1,
-      padding: 16,
       backgroundColor: '#fff',
     },
     mainHeading: {
-      fontSize: 26,
-      fontWeight: 'bold',
-      marginBottom: 20,
-      alignSelf: 'center',
-      color: 'black',
-      padding:20,
-      backgroundColor:'#61C9D3',
-      borderRadius : 20,
-      width : '100%'
+      justifyContent: 'space-between',
+      alignItems: 'flex-start',
+      backgroundColor : '#61C9D3',
+      borderBottomRightRadius : 20,
+      borderBottomLeftRadius : 20,
+      paddingBottom : 30
     },
+   back: {
+     flexDirection: 'row',
+     alignItems: 'center',
+     marginTop: 10,
+   },
+   
+   Headertext: {
+     fontSize: 24,
+     color: 'white',
+   },
     sectionContainer: {
       marginBottom: 20,
+      padding :20,
+      borderRadius : 5,
+      borderWidth: 1, 
+      borderColor: '#f7f8f9', 
+      shadowColor: '#778899', 
+      shadowOffset: { width: 0, height: 2 },
+      shadowOpacity: 0.2,
+      shadowRadius: 4,
+      elevation: 1, 
+      padding : 10,
+      margin : 20
     },
     subHeading: {
       fontSize: 22,
@@ -66,8 +83,10 @@ const styles = StyleSheet.create({
       backgroundColor: '#61C9D3',
       paddingVertical: 20,
       paddingHorizontal: 20,
-      borderRadius: 25,
-      margin: 10,
+      borderTopLeftRadius: 25,
+      borderTopRightRadius : 25,
+      marginTop: 10,
+      paddingBottom: 30,
     },
     journeyIconsContainer: {
       flexDirection: 'row',

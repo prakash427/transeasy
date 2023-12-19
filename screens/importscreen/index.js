@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import { View, Text, TextInput, Image, StyleSheet, TouchableOpacity, ScrollView,Alert } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
+import EvilIcons from 'react-native-vector-icons/EvilIcons';
+import { useNavigation } from '@react-navigation/native';
 import styles from './styles';
 
 
@@ -10,7 +12,7 @@ const ImportScreen = () => {
   const [mobileNumber, setMobileNumber] = useState('');
   const [id, setId] =useState('');
   const [selectedJourneyIcon, setSelectedJourneyIcon] = useState('Bike');
- 
+  const navigation = useNavigation();
 
   const journeyIcons = [
     { title: 'Bike', icon: 'motorbike' },
@@ -61,9 +63,18 @@ const ImportScreen = () => {
   };
 
   return (
+    <>
     <ScrollView>
       <View style={styles.container}>
-        <Text style={styles.mainHeading}>Receiver Details</Text>
+      <View style={styles.mainHeading}> 
+        <View style={styles.back}>
+         <TouchableOpacity onPress={()=>{navigation.navigate('HomeScreen')}}>
+           <EvilIcons name='chevron-left' size={38} color={'white'} /> 
+         </TouchableOpacity> 
+         <Text style={styles.Headertext}>Go Back</Text>
+        </View>
+        <Text style={styles.Headertext} marginLeft = {10}>Receiver Details</Text>
+       </View>
 
         <View style={styles.sectionContainer}>
           <Text style={styles.subHeading}>Complete the following Details</Text>
@@ -90,18 +101,19 @@ const ImportScreen = () => {
           onChangeText={(Number) => setId(Number)}
           keyboardType='number-pad'
           />
-        </View>
-
+        {/* </View>
+        <View style={styles.sectionContainer}>  */}
         <Text style={styles.subHeading}>Select Vehicle</Text>
         <View style={styles.journeyIconsContainer}>
           {journeyIcons.map(renderJourneyIcon)}
         </View>
-
-        <TouchableOpacity onPress={confirmLocation} style={styles.confirmLocationButton}>
-          <Text style={styles.buttonText}>Confirm Location</Text>
-        </TouchableOpacity>
+       </View>
       </View>
     </ScrollView>
+    <TouchableOpacity onPress={confirmLocation} style={styles.confirmLocationButton}>
+          <Text style={styles.buttonText}>Confirm Location</Text>
+        </TouchableOpacity>
+    </>
   );
 };
 

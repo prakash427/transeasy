@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import { View, Text, TouchableOpacity, TextInput,  Image } from 'react-native';
+import { View, Text, TouchableOpacity, TextInput, Image} from 'react-native';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useDispatch } from 'react-redux';
 import { setUserName, setUserPhoneNumber } from '../redux/action';
 import styles from './styles';
@@ -50,32 +51,46 @@ const UserDetailsScreen = ({ navigation }) => {
     navigation.navigate('OTPScreen');
   };
 
-  const handle = () => {
-    dispatch(setUserName(name));
-    dispatch(setUserPhoneNumber(phoneNumber));
-    console.log('dispatched', name);
-    OTP();
+  const handle = async () => {
+    try {
+      dispatch(setUserName(name));
+      dispatch(setUserPhoneNumber(phoneNumber));
+      console.log('dispatched', name);
+      await AsyncStorage.setItem('isLoggedIn', 'true');
+      OTP();
+    } catch (error) {
+      console.error('AsyncStorage Error:', error);
+    }
   };
 
   const validation = () => {
     const numVal = /^[0-9]+$/;
-
+  
     if (isEmpty(name)) {
       setNameerror(true);
-    } else if (isEmpty(phoneNumber)) {
+      return;
+    }
+  
+    if (isEmpty(phoneNumber)) {
       setPhoneerror(true);
       setNameerror(false);
-    } else if (!numVal.test(String(phoneNumber)) || phoneNumber.length < 6 || phoneNumber.length > 12) {
+      return;
+    }
+  
+    if (!numVal.test(String(phoneNumber)) || phoneNumber.length < 6 || phoneNumber.length > 12) {
       setPhoneerror(false);
       setNameerror(false);
       setPhoneinstruction(true);
-    } else if (numVal.test(String(phoneNumber)) || phoneNumber.length < 6 || phoneNumber.length > 12) {
-      setPhoneerror(false);
-      setNameerror(false);
-      setPhoneinstruction(false);
-      handle();
+      return;
     }
+  
+    // If none of the conditions are met, handle the validation
+    setPhoneerror(false);
+    setNameerror(false);
+    setPhoneinstruction(false);
+    handle();
   };
+  
 
   return (
     <View style={styles.container}>

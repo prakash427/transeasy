@@ -15,12 +15,15 @@ import Wallet from '../wallet';
 import ChatScreen from '../customerservice';
 import Myearnings from '../myearnings';
 import History from '../History';
+import Applycoupon from '../applycoupon';
+import SplashScreen from '../splashscreen/splashscreen';
 
 const Stack = createStackNavigator();
 
 const StackNavigator = () => {
   return (
-    <Stack.Navigator initialRouteName="BackgroundVideo">
+    <Stack.Navigator initialRouteName="SplashScreen">
+           <Stack.Screen name="SplashScreen" component={SplashScreen} options={{ headerShown: false }} />
           <Stack.Screen name="BackgroundVideo" component={BackgroundVideo} options={{ headerShown: false }}/>
           <Stack.Screen name="UserDetailsScreen" component={UserDetailsScreen} options={{ headerShown: false }}/>
           <Stack.Screen name="OTPScreen" component={OTPScreen} options={{ headerShown: false }}/>
@@ -35,6 +38,7 @@ const StackNavigator = () => {
           <Stack.Screen name="ChatScreen" component={ChatScreen} options={{headerShown:false}}/>
           <Stack.Screen name="Myearnings" component={Myearnings} options={{headerShown:false}}/>
           <Stack.Screen name="History" component={History} options={{headerShown:false}}/>
+          <Stack.Screen name="Applycoupon" component={Applycoupon} options={{headerShown:false}}/>
     </Stack.Navigator>
   );
 };

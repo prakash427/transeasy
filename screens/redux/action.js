@@ -23,4 +23,9 @@ export const setUserName = (name) => ({
     payload: image,
   });
 
+  export const setCouponn = (coupon) => ({
+    type : 'SET_COUPON',
+    payload : coupon
+  })
+
  
