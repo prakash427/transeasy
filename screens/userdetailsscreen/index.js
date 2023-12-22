@@ -92,7 +92,6 @@ const UserDetailsScreen = ({ navigation }) => {
       return;
     }
   
-    // If none of the conditions are met, handle the validation
     setPhoneerror(false);
     setNameerror(false);
     setPhoneinstruction(false);

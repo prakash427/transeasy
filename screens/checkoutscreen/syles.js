@@ -36,6 +36,7 @@ const styles = StyleSheet.create({
     },
     bill : {
       padding : 20,
+      width : '100%',
       alignSelf : 'center',
       backgroundColor: '#ffffff', 
       padding: 16, 
@@ -50,13 +51,44 @@ const styles = StyleSheet.create({
       elevation: 3, 
       gap : 10,
     },
+    billItem: {
+      flexDirection: 'row',
+      justifyContent: 'space-between',
+      marginBottom: 8, 
+    },
+    label: {
+      fontWeight: 'bold',
+    },
     billtext : {
       fontSize : 20
+    },
+    billproduct:{
+      flexDirection : 'column',
+      justifyContent : 'space-between',
+      backgroundColor: '#ffffff', 
+      borderRadius: 8, 
+      marginVertical: 5, 
+      borderWidth: 1, 
+      borderColor: '#ddd', 
+      shadowColor: '#000', 
+      shadowOffset: { width:20, height: 2 },
+      shadowOpacity: 0.2,
+      shadowRadius: 4,
+      elevation: 3,
+    },
+    billproductt:{
+      flexDirection : 'row',
+      justifyContent : 'space-between',
+      backgroundColor: '#ffffff',  
+      borderRadius: 8, 
+      marginVertical: 10, 
+      gap : 20,
+      padding : 10,
     },
     coupon : {
       flexDirection : 'row',
       alignSelf : 'center',
-      justifyContent : 'center',
+      justifyContent : 'space-between',
       backgroundColor: '#ffffff', 
       padding: 20, 
       borderRadius: 8, 
@@ -68,7 +100,7 @@ const styles = StyleSheet.create({
       shadowOpacity: 0.2,
       shadowRadius: 4,
       elevation: 3,
-      gap : 145
+      width:'100%'
     },
     input: {
       marginTop : 20,
@@ -103,8 +135,18 @@ const styles = StyleSheet.create({
   },
   productimage : {
     alignSelf : 'center',
-    padding : 5
-  }
+    padding : 5,
+    height : 100,
+    width : 100
+  },
+  separator: {
+    textAlign: 'center',
+    color: 'gray',
+  },
+  value: {
+    fontWeight : 'bold'
+  },
+  
   });
 
   export default styles;

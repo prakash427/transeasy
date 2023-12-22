@@ -101,8 +101,6 @@ const ImportScreen = () => {
           onChangeText={(Number) => setId(Number)}
           keyboardType='number-pad'
           />
-        {/* </View>
-        <View style={styles.sectionContainer}>  */}
         <Text style={styles.subHeading}>Select Vehicle</Text>
         <View style={styles.journeyIconsContainer}>
           {journeyIcons.map(renderJourneyIcon)}

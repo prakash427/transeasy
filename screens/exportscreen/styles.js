@@ -5,14 +5,19 @@ const styles = StyleSheet.create({
    flex: 1,
    backgroundColor: '#fff',
  },
-   
+ headingContainer : {
+ flex : 1,
+ flexDirection : 'row',
+ justifyContent : 'space-between'
+ } , 
 mainHeading: {
    justifyContent: 'space-between',
    alignItems: 'flex-start',
    backgroundColor : '#61C9D3',
    borderBottomRightRadius : 20,
    borderBottomLeftRadius : 20,
-   paddingBottom : 20
+   paddingBottom : 20,
+   gap : 8
  },
 back: {
   flexDirection: 'row',

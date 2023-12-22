@@ -11,8 +11,7 @@ import { color } from 'react-native-elements/dist/helpers';
 const ItemDetailsScreen = ({ route }) => {
   const navigation = useNavigation();
   const { title, rating, number, discountPrice, image } = route.params;
-  const product = useSelector((state)=>state.user.productName)
-  const dimensions = useSelector((state)=>state.user.dimensions)
+  const products = useSelector((state) => state.user.productName);
   const coupon = useSelector((state)=>state.user.coupon)
   const { image: reduxImage } = useSelector((state) => state.user);
   const[email, setEmail] = useState('')
@@ -59,6 +58,15 @@ const toggleOffer = () => {
   }
 };
 
+const BillText = ({ label, value }) => (
+  <View style={styles.billItem}>
+    <Text style={styles.label}>{label}</Text>
+    <Text style={styles.value}>{value}</Text>
+  </View>
+);
+
+
+
   return (
     <>
      <ScrollView style={{ flex: 1 }}>
@@ -77,13 +85,27 @@ const toggleOffer = () => {
         <Text style={styles.billtext}>{!offer?'Apply Coupon':'WELCOME'}</Text>
         <MaterialCommunityIcons name ={!offer?'ticket-percent':'close-circle'} size={30} onPress={toggleOffer}/>
       </TouchableOpacity>
-      <View style = {styles.productimage}>
-      {reduxImage && <Image source={{ uri: reduxImage }} style={{ width: 200, height: 200 }} />}
-
+ <View style={styles.billproduct}>
+  {products.map((product, index) => (
+    <View key={index}>
+      <View style={styles.billproductt}>
+        <View>
+        <Text style={styles.label}>{`Product ${index + 1} :`}</Text>
+         <Text style={styles.productName}>{product.productName}</Text>
+        </View>
+        <View>
+       <Text style={styles.label}>Dimensions :</Text>
+        <Text style={styles.dimensions}>{product.dimensions}</Text>
+       </View>
+        <View style = {styles.productimage}>
+        <Image source={{ uri: product.selectedImage.uri }} style={styles.productimage} />
+       </View>
+      </View>
+      {index < products.length - 1 && <Text style={styles.separator}>---------------------------------------------------------------------------------------</Text>}
     </View>
+  ))}
+</View>
       <View style={styles.bill}>
-        <BillText label="Product Name" value={product} />
-        <BillText label="Product Dimensions" value={dimensions} />
         <BillText label="Transport Services" value={`₹${discountPrice}`} />
         <BillText label="Delivery Agent Fee" value={`₹${deliveryAgentFee}`} />
         <BillText label="Platform Fee" value={`₹${platformFee}`}/>

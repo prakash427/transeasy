@@ -1,5 +1,4 @@
 
-
 import React, { useState, useEffect } from "react";
 import { View, Text, TouchableOpacity, TextInput, FlatList,Image } from 'react-native';
 import styles from "./styles";
@@ -28,11 +27,6 @@ const Applycoupon = () => {
   }
 
   const textColor = couponinfo === 'You got Rs.60 off' ? 'green' : 'red';
-
-  // useEffect(() => {
-  //   // Here, you can check the changes in the coupon state
-  //   console.log('Coupon State:', couponState);
-  // }, [couponState]);
 
   const renderItem = ({ item }) => (
     <View style={styles.item}>

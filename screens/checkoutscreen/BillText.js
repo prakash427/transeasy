@@ -1,7 +1,7 @@
 
 import React from 'react';
 import { View, Text } from 'react-native';
-import styles from './syles'; // Import your styles
+import styles from './syles'; 
 
 const BillText = ({ label, value }) => (
   <View>

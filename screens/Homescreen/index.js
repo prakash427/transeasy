@@ -122,10 +122,6 @@ const HomeScreen = () => {
   const renderBottomBarButton = (iconName, routeName, onPress) => {
     const isSelected = selectedIcon === iconName;
 
-    // useEffect(() => {
-    //   dispatch(setUserName(user.name));
-    // }, []);
-
     return (
       <View>
         <TouchableOpacity
@@ -254,11 +250,8 @@ const HomeScreen = () => {
 };
 
 
-// export default HomeScreen;
-
 const mapStateToProps = (state) => ({
   username: state.user.name,
-  // other props from Redux state
 });
 
 export default connect(mapStateToProps)(HomeScreen);
