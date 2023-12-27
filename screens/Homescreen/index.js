@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import { View, Text, FlatList, Image, TouchableOpacity, PermissionsAndroid, Modal} from 'react-native';
+import { View, Text, FlatList, Image, TouchableOpacity, PermissionsAndroid, Modal, Linking} from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useSelector } from 'react-redux';
 import styles from './styles';
@@ -104,11 +104,13 @@ const HomeScreen = () => {
   ];
 
   const username = useSelector((state) => state.user.name);
+
   const images = [
-    require('../assets/rapidooooo.png'),
-    require('../assets/Swiggy-img.png'),
-    require('../assets/zomatooo.png'),
+    { image: require('../assets/rapidooooo.png'), downloadLink:'https://play.google.com/store/apps/details?id=com.rapido.rider&hl=en&gl=US'},
+    { image: require('../assets/Swiggy-img.png'), downloadLink:'https://play.google.com/store/apps/details?id=in.swiggy.android&hl=en_IN&gl=US'},
+    { image: require('../assets/zomatooo.png'), downloadLink:'https://play.google.com/store/apps/details?id=com.application.zomato&hl=en_IN&gl=US'},
   ];
+
 
   const renderItem = ({ item }) => (
     <View style={{ backgroundColor:'blue', borderRadius: 8, height : 150 }}>  
@@ -164,9 +166,16 @@ const HomeScreen = () => {
       >
         {images.map((image, index) => (
           <View key={index} style={styles.slide}>
-            <Image source={image} style={styles.image} resizeMode="cover" />
+            <Image source={image.image} style={styles.image} resizeMode="cover" />
+            <TouchableOpacity
+      style={styles.downloadButton}
+      onPress={() =>  Linking.openURL(image.downloadLink)} 
+    >
+      <Text style={styles.downloadtext}>Download Now</Text>
+    </TouchableOpacity>
           </View>
         ))}
+        
       </Swiper>
     </View>
       <View style={styles.flatList}>

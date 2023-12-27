@@ -1,9 +1,11 @@
 import { StyleSheet } from "react-native"; 
+import { useColorScheme } from "react-native";
 
 const styles = StyleSheet.create({
+
  container: {
    flex: 1,
-   backgroundColor: '#fff',
+   backgroundColor: '#fff'
  },
  headingContainer : {
  flex : 1,
@@ -127,7 +129,6 @@ Headertext: {
       backgroundColor : '#61C9D3',
       width : 20,
       borderRadius : 10,
-
     }
   });
 

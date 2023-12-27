@@ -207,9 +207,19 @@ const styles = StyleSheet.create({
               color : 'red',
               fontWeight : 'bold',
               fontSize : 20
+          },
+          downloadButton: {
+            position: 'absolute',
+            bottom: 10,
+            right: 10,
+            backgroundColor: '#e6e6fa', 
+            padding : 7,
+            borderRadius : 10
+          },
+          downloadtext : {
+            color : '#4b0082',
+            fontWeight : 'bold'
           }
-    
-     
   });
 
   export default styles;

@@ -5,8 +5,6 @@ import { useSelector } from 'react-redux';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons'
 import { useNavigation } from '@react-navigation/native';
 import styles from './syles';
-import BillText from './BillText';
-import { color } from 'react-native-elements/dist/helpers';
 
 const ItemDetailsScreen = ({ route }) => {
   const navigation = useNavigation();

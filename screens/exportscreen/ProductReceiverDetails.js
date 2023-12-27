@@ -36,9 +36,9 @@ return(
   <View style={styles.sectionContainer}>
     <View style={styles.headingContainer}>
         <Text style={styles.subHeading}>{heading}</Text>
-        <TouchableOpacity onPress={() => onDeleteProduct(productIndex)}>
+        {productIndex !== 0 ?<TouchableOpacity onPress={() => onDeleteProduct(productIndex)}>
           <MaterialIcons name="delete" size={24} color="red" />
-        </TouchableOpacity>
+        </TouchableOpacity> :null}
       </View>
     <TextInput
       style={styles.inputField}

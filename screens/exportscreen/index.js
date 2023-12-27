@@ -11,7 +11,6 @@ import { useNavigation } from '@react-navigation/native';
 import { setProduct, setProductDimensions, setImage } from '../redux/action';
 const ExportScreen = () => {
   const dispatch = useDispatch();
-
   const navigation = useNavigation();
   const [sections, setSections] = useState([{}]);
   const [products, setProducts] = useState([
@@ -46,37 +45,11 @@ const ExportScreen = () => {
           const updatedSections = [...sections];
           updatedSections.splice(index, 1);
           setSections(updatedSections);
-        };
 
-  const renderProductReceiverDetails = (section, index) => (
-    <ProductReceiverDetails
-      key={index}
-      productIndex={index}
-      product={products[index]}
-      setProduct={(updatedProduct) => {
-        const updatedProducts = [...products];
-        updatedProducts[index] = updatedProduct;
-        setProducts(updatedProducts);
-      }}
-      validateInputs={validateInputs}
-      productName={productName}
-      setProductName={setProductName}
-      dimensions={dimensions}
-      setDimensions={setDimensions}
-      receiverName={receiverName}
-      setReceiverName={setReceiverName}
-      mobileNumber={mobileNumber}
-      setMobileNumber={setMobileNumber}
-      address={address}
-      setAddress={setAddress}
-      openGallery={openGallery}
-      openCamera={openCamera}
-      removeImage={removeImage}
-      selectedImage={products[index].selectedImage}
-      renderError={(field) => renderError(field,index)}
-      onDeleteProduct={onDeleteProduct}
-    />
-  );
+          const productSections = [...products];
+          productSections.splice(index,1);
+          setProducts(productSections);
+        };
 
   const addProduct = () => {
     setSections([...sections, {}]);

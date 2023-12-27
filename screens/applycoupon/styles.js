@@ -99,7 +99,6 @@ const styles = StyleSheet.create({
           couponcard : {
             flexDirection : 'column'
           }
-
 })
 
 export default styles

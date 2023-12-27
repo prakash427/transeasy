@@ -79,7 +79,6 @@ const Applycoupon = () => {
         renderItem={({ item }) => (
           <TouchableOpacity>
             <ListItem bottomDivider style={styles.listItem}>
-            {/* <View style={styles.couponcard}>   */}
               <View style={styles.couponcontainer}>
               <View style={styles.couponcard}> 
                 <View style={styles.couponimgcontainer}>
@@ -100,8 +99,7 @@ const Applycoupon = () => {
             </ListItem>
           </TouchableOpacity>
         )}
-      />
-      
+      />      
     </View>
   );
 };
