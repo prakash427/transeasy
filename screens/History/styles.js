@@ -3,13 +3,11 @@ import { StyleSheet, Dimensions } from "react-native";
 const { width } = Dimensions.get('window');
 
 const styles = StyleSheet.create({
- 
+
   Header: {
-    backgroundColor: '#61C9D3',
     padding: 20,
     alignItems: 'center',
     flexDirection: 'row',
-    gap: 5,
 
   },
   Headertext: {
@@ -39,7 +37,7 @@ const styles = StyleSheet.create({
   rating: {
     color: 'black',
     padding: 2,
-    fontWeight : 'bold'
+    fontWeight: 'bold'
   },
   originalprice: {
     color: 'red'
@@ -53,26 +51,26 @@ const styles = StyleSheet.create({
   title: {
     fontWeight: 'bold'
   },
-  rewards : {
-    padding : 20,
-      alignSelf : 'flex-start',
-      backgroundColor: '#ffffff', 
-      marginLeft: 16, 
-      borderRadius: 8, 
-      marginVertical: 10, 
-      borderWidth: 1, 
-      borderColor: '#ddd', 
-      shadowColor: '#000', 
-      shadowOffset: { width: 0, height: 2 },
-      shadowOpacity: 0.2,
-      shadowRadius: 4,
-      elevation: 3, 
-     
+  rewards: {
+    padding: 20,
+    alignSelf: 'flex-start',
+    backgroundColor: '#ffffff',
+    marginLeft: 16,
+    borderRadius: 8,
+    marginVertical: 10,
+    borderWidth: 1,
+    borderColor: '#ddd',
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.2,
+    shadowRadius: 4,
+    elevation: 3,
+
   },
-  rewardstext : {
-    color : 'black',
-    fontWeight : 'bold',
-    fontSize : 15
+  rewardstext: {
+    color: 'black',
+    fontWeight: 'bold',
+    fontSize: 15
   }
 });
 

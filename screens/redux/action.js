@@ -8,9 +8,9 @@ export const setUserName = (name) => ({
     payload: phoneNumber,
   });
 
-  export const setProduct = (productName) => ({
+  export const setProduct = (products) => ({
     type: 'SET_PRODUCT',
-    payload: productName,
+    payload: products,
   });
 
 

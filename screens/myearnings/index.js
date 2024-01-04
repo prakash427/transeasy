@@ -2,17 +2,19 @@
 import React from 'react';
 import { View, Image, Text, TouchableOpacity, FlatList } from 'react-native';
 import Swiper from 'react-native-swiper';
-import {  ListItem } from 'react-native-elements';
+import { ListItem } from 'react-native-elements';
 import EvilIcons from 'react-native-vector-icons/EvilIcons';
 import { useNavigation } from '@react-navigation/native';
+import LinearGradient from 'react-native-linear-gradient';
+import CustomLinearGradient from '../customlineargradient/lineargradient';
 import styles from './styles';
 
 const Myearnings = () => {
 
-const navigation = useNavigation();  
-const home = () => {
-  navigation.navigate('HomeScreen')
-}
+  const navigation = useNavigation();
+  const home = () => {
+    navigation.navigate('HomeScreen')
+  }
 
   const images = [
     require('../assets/KFC.jpg'),
@@ -30,12 +32,16 @@ const home = () => {
 
   return (
     <View style={{ flex: 1 }}>
-      <View style={styles.Header}>
+      <LinearGradient style={styles.Header}
+        colors={['#7070d9', '#24a1c9']}
+        start={{ x: 1, y: 0 }}
+        end={{ x: 0, y: 1 }}
+      >
         <TouchableOpacity onPress={home}>
-          <EvilIcons name='chevron-left' size={40} color={'white'} />
+          <EvilIcons name='chevron-left' size={40} color={'white'} style={styles.icon} />
         </TouchableOpacity>
         <Text style={styles.Headertext}>Rewards</Text>
-      </View>
+      </LinearGradient>
       <View style={styles.container}>
         <Swiper
           style={styles.wrapper}
@@ -53,7 +59,7 @@ const home = () => {
           ))}
         </Swiper>
       </View>
-      <View style ={styles.rewards}>
+      <View style={styles.rewards}>
         <Text style={styles.rewardstext}>YOUR REWARDS</Text>
       </View>
       <FlatList

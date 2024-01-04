@@ -14,8 +14,8 @@ const ChatScreen = () => {
 
   const [messages, setMessages] = useState([]);
   const onSend = (newMessages = []) => {
-    const isUserMessage = newMessages[0]?.user?._id === 2; 
-    
+    const isUserMessage = newMessages[0]?.user?._id === 2;
+
     if (isUserMessage) {
       setMessages((prevMessages) => GiftedChat.append(prevMessages, newMessages));
       const chatbotResponse = generateChatbotResponse(newMessages);
@@ -28,8 +28,8 @@ const ChatScreen = () => {
 
   const generateChatbotResponse = (userMessages) => {
     const lastUserMessage = userMessages[0].text.toLowerCase();
-  
-    
+
+
     if (lastUserMessage.includes('hi')) {
       return [
         {
@@ -39,7 +39,7 @@ const ChatScreen = () => {
           user: { _id: 1 },
         },
       ];
-    }else if (lastUserMessage.includes('hello')) {
+    } else if (lastUserMessage.includes('hello')) {
       return [
         {
           _id: Math.random(),
@@ -48,7 +48,7 @@ const ChatScreen = () => {
           user: { _id: 1 },
         },
       ];
-    } 
+    }
     else if (lastUserMessage.includes('bye')) {
       return [
         {
@@ -58,7 +58,7 @@ const ChatScreen = () => {
           user: { _id: 1 },
         },
       ];
-    } 
+    }
     else if (lastUserMessage.includes('i have an issue with my transaction')) {
       return [
         {
@@ -103,39 +103,39 @@ const ChatScreen = () => {
     const { additionalComponents } = props.currentMessage;
     return (
       <View>
-      <Bubble
-        {...props}
-        textStyle={{
-          left: { color: 'white' }, 
-        }}
-        wrapperStyle={{
-          left: { backgroundColor: '#61C9D3' }, 
-        }}
-      />
-       {additionalComponents && (
+        <Bubble
+          {...props}
+          textStyle={{
+            left: { color: 'white' },
+          }}
+          wrapperStyle={{
+            left: { backgroundColor: '#61C9D3' },
+          }}
+        />
+        {additionalComponents && (
           <View style={{ flexDirection: 'row', justifyContent: 'space-evenly', marginTop: 10 }}>
-            <TouchableOpacity style={{ backgroundColor: '#1e90ff', borderRadius : 5 }} onPress={() => Home()}>
-              <Text style={{ color: 'white', padding : 7 }}>Close this chat</Text>
-            </TouchableOpacity> 
-            <TouchableOpacity style={{ backgroundColor: '#1e90ff', borderRadius : 5 }} 
-            onPress={() => {
-              const newMessages = [
-                {
-                  _id: Math.random(),
-                  text: 'hello', 
-                  createdAt: new Date(),
-                  user: { _id: 2 },
-                },
-              ];
-              onSend(newMessages);
+            <TouchableOpacity style={{ backgroundColor: '#1e90ff', borderRadius: 5 }} onPress={() => Home()}>
+              <Text style={{ color: 'white', padding: 7 }}>Close this chat</Text>
+            </TouchableOpacity>
+            <TouchableOpacity style={{ backgroundColor: '#1e90ff', borderRadius: 5 }}
+              onPress={() => {
+                const newMessages = [
+                  {
+                    _id: Math.random(),
+                    text: 'hello',
+                    createdAt: new Date(),
+                    user: { _id: 2 },
+                  },
+                ];
+                onSend(newMessages);
               }}
-                >
-              <Text style={{ color: 'white', padding : 7 }}>Another query</Text>
-            </TouchableOpacity>      
+            >
+              <Text style={{ color: 'white', padding: 7 }}>Another query</Text>
+            </TouchableOpacity>
           </View>
         )}
       </View>
-    ); 
+    );
   };
 
   useEffect(() => {
@@ -145,15 +145,15 @@ const ChatScreen = () => {
 
   return (
     <ImageBackground source={require('../assets/chatbackground.webp')} style={styles.backgroundImage}>
-    <View style={styles.chatContainer}>
-    <GiftedChat
-      messages={messages}
-      onSend={(newMessages) => onSend(newMessages)}
-      user={{ _id: 2 }}
-      renderAvatar={(props) => renderAvatar(props)}
-      renderBubble={(props) => renderBubble(props)}
-     />
-     </View>
+      <View style={styles.chatContainer}>
+        <GiftedChat
+          messages={messages}
+          onSend={(newMessages) => onSend(newMessages)}
+          user={{ _id: 2 }}
+          renderAvatar={(props) => renderAvatar(props)}
+          renderBubble={(props) => renderBubble(props)}
+        />
+      </View>
     </ImageBackground>
   );
 };

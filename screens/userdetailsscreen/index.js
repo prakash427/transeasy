@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from 'react';
-import { View, Text, TouchableOpacity, TextInput, Image} from 'react-native';
+import { View, Text, TouchableOpacity, TextInput, Image } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useDispatch } from 'react-redux';
 import { setUserName, setUserPhoneNumber } from '../redux/action';
 import styles from './styles';
 import { isEmpty } from 'lodash';
 import auth from '@react-native-firebase/auth';
+import LinearGradient from 'react-native-linear-gradient';
 import { GoogleSignin, GoogleSigninButton } from '@react-native-google-signin/google-signin';
 
 const UserDetailsScreen = ({ navigation }) => {
@@ -36,9 +37,9 @@ const UserDetailsScreen = ({ navigation }) => {
       dispatch(setUserName(user.name))
       dispatch(setUserPhoneNumber(user.email));
       console.log('dispatched', user.name);
-      await AsyncStorage.setItem('isLoggedIn','true');
-      await AsyncStorage.setItem('name',user.name)
-      await AsyncStorage.setItem('phone',user.email)
+      await AsyncStorage.setItem('isLoggedIn', 'true');
+      await AsyncStorage.setItem('name', user.name)
+      await AsyncStorage.setItem('phone', user.email)
       console.log('isLoggedIn set to true');
       navigation.navigate('HomeScreen');
 
@@ -61,10 +62,10 @@ const UserDetailsScreen = ({ navigation }) => {
       dispatch(setUserName(name));
       dispatch(setUserPhoneNumber(phoneNumber));
       console.log('dispatched', name);
-      await AsyncStorage.setItem('isLoggedIn','true');
-      await AsyncStorage.setItem('name',name)
-      await AsyncStorage.setItem('phone',phoneNumber)
-      console.log('isLoggedIn set to true'); 
+      await AsyncStorage.setItem('isLoggedIn', 'true');
+      await AsyncStorage.setItem('name', name)
+      await AsyncStorage.setItem('phone', phoneNumber)
+      console.log('isLoggedIn set to true');
       OTP();
     } catch (error) {
       console.error('AsyncStorage Error:', error);
@@ -73,31 +74,31 @@ const UserDetailsScreen = ({ navigation }) => {
 
   const validation = () => {
     const numVal = /^[0-9]+$/;
-  
+
     if (isEmpty(name)) {
       setNameerror(true);
       return;
     }
-  
+
     if (isEmpty(phoneNumber)) {
       setPhoneerror(true);
       setNameerror(false);
       return;
     }
-  
+
     if (!numVal.test(String(phoneNumber)) || phoneNumber.length < 6 || phoneNumber.length > 12) {
       setPhoneerror(false);
       setNameerror(false);
       setPhoneinstruction(true);
       return;
     }
-  
+
     setPhoneerror(false);
     setNameerror(false);
     setPhoneinstruction(false);
     handle();
   };
-  
+
 
   return (
     <View style={styles.container}>
@@ -105,7 +106,7 @@ const UserDetailsScreen = ({ navigation }) => {
       <Text style={styles.title}>How we will call you</Text>
 
       <TextInput
-        style={[styles.input, { borderColor: isNameFocused ? '#61C9D3' : 'black' }]}
+        style={[styles.input, { borderColor: isNameFocused ? '#7070d9' : 'black' }]}
         placeholder="Name"
         value={name}
         onChangeText={(text) => setName(text)}
@@ -117,7 +118,7 @@ const UserDetailsScreen = ({ navigation }) => {
       <Text style={styles.title}>Give your number to contact you</Text>
 
       <TextInput
-        style={[styles.input, { borderColor: isPhoneNumberFocused ? '#61C9D3' : 'black' }]}
+        style={[styles.input, { borderColor: isPhoneNumberFocused ? '#7070d9' : 'black' }]}
         placeholder="Phone Number"
         value={phoneNumber}
         onChangeText={(text) => setPhoneNumber(text)}
@@ -127,10 +128,15 @@ const UserDetailsScreen = ({ navigation }) => {
       />
       {phoneerror ? <View><Text style={styles.errormessage}>Please enter your number</Text></View> : null}
       {phoneinstruction ? <View><Text style={styles.errormessage}>Please enter a valid number</Text></View> : null}
-
-      <TouchableOpacity style={styles.button} onPress={validation}>
-        <Text style={styles.buttonText}>Continue</Text>
-      </TouchableOpacity>
+      <LinearGradient style={styles.button}
+        colors={['#7070d9', '#24a1c9']}
+        start={{ x: 1, y: 0 }}
+        end={{ x: 0, y: 1 }}
+      >
+        <TouchableOpacity onPress={validation}>
+          <Text style={styles.buttonText}>Continue</Text>
+        </TouchableOpacity>
+      </LinearGradient>
       <View style={styles.or}>
         <Text style={styles.ortext}>--------   (OR)   -------</Text>
       </View>

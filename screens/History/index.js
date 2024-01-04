@@ -5,36 +5,41 @@ import { ListItem } from 'react-native-elements';
 import EvilIcons from 'react-native-vector-icons/EvilIcons';
 import { useNavigation } from '@react-navigation/native';
 import styles from './styles';
+import LinearGradient from 'react-native-linear-gradient';
 
 const History = () => {
 
-const navigation = useNavigation();  
-const home = () => {
-  navigation.navigate('HomeScreen')
-}
+  const navigation = useNavigation();
+  const home = () => {
+    navigation.navigate('HomeScreen')
+  }
 
-const getStatusColor = (status) => {
+  const getStatusColor = (status) => {
     return status === 'Pending' ? 'orange' : 'green';
   };
 
-const dummyData = [
-    { id: '1', title:'CLEANTECH', rating: 'Ordered:', number:'12-7-22',offer:'Delivered', image: require('../assets/cleantech.png') },
-    { id: '2', title:'ALL COUNTRY',rating: 'Ordered:', number:'14-8-22', offer:'Pending',image: require('../assets/allcountry.png') },
-    { id: '3', title:'ATC',rating: 'Ordered:', number:'17-9-23', offer:'Delivered',image: require('../assets/atc.jpg') },
-    { id: '4', title:'DELIVER',rating: 'Ordered:', number:'12-10-23', offer:'Pending',image: require('../assets/deliver.jpg') },
-    { id: '5', title:'EXPRESS',rating: 'Ordered:', number:'05-11-22', offer:'Delivered',image: require('../assets/express.jpg') },
-    
+  const dummyData = [
+    { id: '1', title: 'CLEANTECH', rating: 'Ordered:', number: '12-7-22', offer: 'Delivered', image: require('../assets/cleantech.png') },
+    { id: '2', title: 'ALL COUNTRY', rating: 'Ordered:', number: '14-8-22', offer: 'Pending', image: require('../assets/allcountry.png') },
+    { id: '3', title: 'ATC', rating: 'Ordered:', number: '17-9-23', offer: 'Delivered', image: require('../assets/atc.jpg') },
+    { id: '4', title: 'DELIVER', rating: 'Ordered:', number: '12-10-23', offer: 'Pending', image: require('../assets/deliver.jpg') },
+    { id: '5', title: 'EXPRESS', rating: 'Ordered:', number: '05-11-22', offer: 'Delivered', image: require('../assets/express.jpg') },
+
   ];
 
   return (
     <View style={{ flex: 1 }}>
-      <View style={styles.Header}>
+      <LinearGradient
+        style={styles.Header}
+        colors={['#7070d9', '#24a1c9']}
+        start={{ x: 1, y: 0 }}
+        end={{ x: 0, y: 1 }} >
         <TouchableOpacity onPress={home}>
           <EvilIcons name='chevron-left' size={40} color={'white'} />
         </TouchableOpacity>
         <Text style={styles.Headertext}>History</Text>
-      </View>
-      <View style ={styles.rewards}>
+      </LinearGradient>
+      <View style={styles.rewards}>
         <Text style={styles.rewardstext}>YOUR ORDERS</Text>
       </View>
       <FlatList
@@ -53,7 +58,7 @@ const dummyData = [
                   <ListItem.Title style={styles.number}>{item.number}</ListItem.Title>
                 </View>
                 <View style={styles.incontent}>
-                  <ListItem.Title style= {[styles.offer, { color: getStatusColor(item.offer) }]}>
+                  <ListItem.Title style={[styles.offer, { color: getStatusColor(item.offer) }]}>
                     {item.offer}
                   </ListItem.Title>
                 </View>

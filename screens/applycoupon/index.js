@@ -1,12 +1,13 @@
 
 import React, { useState, useEffect } from "react";
-import { View, Text, TouchableOpacity, TextInput, FlatList,Image } from 'react-native';
+import { View, Text, TouchableOpacity, TextInput, FlatList, Image } from 'react-native';
 import styles from "./styles";
-import {  ListItem } from 'react-native-elements';
+import { ListItem } from 'react-native-elements';
 import EvilIcons from 'react-native-vector-icons/EvilIcons';
 import { useNavigation } from "@react-navigation/native";
 import { setCouponn } from "../redux/action";
 import { useDispatch, useSelector } from "react-redux";
+import LinearGradient from "react-native-linear-gradient";
 
 const Applycoupon = () => {
   const [coupon, setCoupon] = useState('');
@@ -39,40 +40,42 @@ const Applycoupon = () => {
     { key: '2', text: 'Item 2' },
     { key: '3', text: 'Item 3' },
   ];
-   
+
   const dummyData = [
-    { id: '1', title: 'AXIS BANK',  originalPrice: 'Apply',description:'get upto 20%off by using Axis credit card', image: require('../assets/axis-bank-logo.jpg') },
-    { id: '2', title: 'ICICI BANK',  originalPrice: 'Apply',description:'get upto 20%off by using icici credit card', image: require('../assets/icici-logo.jpg') },
-    { id: '3', title: 'CANARA BANK', originalPrice: 'Apply',description:'get upto 20%off by using canara credit card', image: require('../assets/canarabank-logo.jpeg') },
-    { id: '4', title: 'SIMPLY',  originalPrice: 'Apply',description:'get upto 20%off by using simpl app',image: require('../assets/simpl-logo.png') },
-    { id: '5', title: 'AMAZON PAY',  originalPrice: 'Apply', description:'get upto 20%off by using Amazon Pay', image: require('../assets/amazonpay.png') },
+    { id: '1', title: 'AXIS BANK', originalPrice: 'Apply', description: 'get upto 20%off by using Axis credit card', image: require('../assets/axis-bank-logo.jpg') },
+    { id: '2', title: 'ICICI BANK', originalPrice: 'Apply', description: 'get upto 20%off by using icici credit card', image: require('../assets/icici-logo.jpg') },
+    { id: '3', title: 'CANARA BANK', originalPrice: 'Apply', description: 'get upto 20%off by using canara credit card', image: require('../assets/canarabank-logo.jpeg') },
+    { id: '4', title: 'SIMPLY', originalPrice: 'Apply', description: 'get upto 20%off by using simpl app', image: require('../assets/simpl-logo.png') },
+    { id: '5', title: 'AMAZON PAY', originalPrice: 'Apply', description: 'get upto 20%off by using Amazon Pay', image: require('../assets/amazonpay.png') },
   ];
 
   return (
     <View style={{ flex: 1 }}>
-         <View style={styles.Header}>
-      <TouchableOpacity onPress={()=>{navigation.navigate('ItemDetailsScreen')}}>
-        <EvilIcons name='chevron-left' size={40} color={'white'} />
-      </TouchableOpacity>
-      <Text style={styles.Headertext}>Applycoupon</Text>
-    </View>
-    <View style={styles.container}>
-     <TextInput
-     style={styles.input}
-     placeholder="Enter coupon code"
-     value={coupon}
-     onChangeText={(text) => setCoupon(text)}
-   />
-   <View>
-     <Text style={{ color: textColor }}>{couponinfo}</Text>
-   </View>
-   <TouchableOpacity style={styles.amount} onPress={Couponvalidation}>
-     <Text style={styles.amountText}>Apply Coupon</Text>
-   </TouchableOpacity>
-   </View>
-   <View style ={styles.rewards}>
+      <LinearGradient
+        style={styles.Header}
+        colors={['#7070d9', '#24a1c9']}
+        start={{ x: 1, y: 0 }}
+        end={{ x: 0, y: 1 }}
+      >
+        <Text style={styles.Headertext}>Applycoupon</Text>
+      </LinearGradient>
+      <View style={styles.container}>
+        <TextInput
+          style={styles.input}
+          placeholder="Enter coupon code"
+          value={coupon}
+          onChangeText={(text) => setCoupon(text)}
+        />
+        <View>
+          <Text style={{ color: textColor }}>{couponinfo}</Text>
+        </View>
+        <TouchableOpacity style={styles.amount} onPress={Couponvalidation}>
+          <Text style={styles.amountText}>Apply Coupon</Text>
+        </TouchableOpacity>
+      </View>
+      <View style={styles.rewards}>
         <Text style={styles.rewardstext}>Another Coupons</Text>
-     </View>
+      </View>
       <FlatList
         data={dummyData}
         keyExtractor={(item) => item.id}
@@ -80,17 +83,17 @@ const Applycoupon = () => {
           <TouchableOpacity>
             <ListItem bottomDivider style={styles.listItem}>
               <View style={styles.couponcontainer}>
-              <View style={styles.couponcard}> 
-                <View style={styles.couponimgcontainer}>
-                   <Image source={item.image} style={styles.images} />
-                   <ListItem.Title style={styles.title}>{item.title}</ListItem.Title>
-                </View>
-                <View>
-                <Text>--------------------------------------------------------------------------</Text>
-                </View>
-                <View>
-                <ListItem.Title>{item.description}</ListItem.Title>
-                </View>
+                <View style={styles.couponcard}>
+                  <View style={styles.couponimgcontainer}>
+                    <Image source={item.image} style={styles.images} />
+                    <ListItem.Title style={styles.title}>{item.title}</ListItem.Title>
+                  </View>
+                  <View>
+                    <Text>--------------------------------------------------------------------------</Text>
+                  </View>
+                  <View>
+                    <ListItem.Title>{item.description}</ListItem.Title>
+                  </View>
                 </View>
                 <View style={styles.incontent}>
                   <ListItem.Title style={styles.originalprice}> {item.originalPrice}</ListItem.Title>
@@ -99,7 +102,7 @@ const Applycoupon = () => {
             </ListItem>
           </TouchableOpacity>
         )}
-      />      
+      />
     </View>
   );
 };

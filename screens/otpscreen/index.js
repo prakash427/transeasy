@@ -1,5 +1,5 @@
 import React, { useState, useRef } from 'react';
-import { View, Text, Image, TextInput, TouchableOpacity,  Alert } from 'react-native';
+import { View, Text, Image, TextInput, TouchableOpacity, Alert } from 'react-native';
 import AntDesign from 'react-native-vector-icons/AntDesign';
 import styles from './styles'
 import { useNavigation } from '@react-navigation/native';
@@ -9,9 +9,9 @@ const OTPScreen = () => {
   const otpInputRefs = useRef([]);
 
   const navigation = useNavigation();
-    const LOCATION = () => {
-        navigation.navigate('HomeScreen'); 
-      };
+  const LOCATION = () => {
+    navigation.navigate('HomeScreen');
+  };
 
   const handleOTPChange = (text, index) => {
     setOtpFields((prevOtpFields) => {
@@ -28,10 +28,10 @@ const OTPScreen = () => {
 
   const handleSubmit = () => {
     const isOtpFilled = otpFields.every((field) => field !== '');
-  
+
     if (isOtpFilled) {
-      const isOtpValid = otpFields.join('') === '1234'; 
-  
+      const isOtpValid = otpFields.join('') === '1234';
+
       if (isOtpValid) {
         Alert.alert('Verification Successful', 'OTP verified successfully!');
       } else {
@@ -41,7 +41,7 @@ const OTPScreen = () => {
       Alert.alert('Error', 'Please fill all OTP fields.');
     }
   };
-  
+
   const handleResendOTP = () => {
     Alert.alert('Resend OTP', 'New OTP sent to your phone number.');
   };
@@ -49,11 +49,11 @@ const OTPScreen = () => {
   return (
     <View style={styles.container}>
       <TouchableOpacity
-          onPress={() => console.log('Left arrow pressed')}
-          style={styles.leftArrow}
-        >
-          <AntDesign name="arrowleft" size={30} color={'orangered'} />
-        </TouchableOpacity>
+        onPress={() => console.log('Left arrow pressed')}
+        style={styles.leftArrow}
+      >
+        <AntDesign name="arrowleft" size={30} color={'orangered'} />
+      </TouchableOpacity>
 
       <Image source={require('../assets/otp.jpg')} style={styles.image} />
 

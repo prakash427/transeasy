@@ -6,6 +6,7 @@ import EvilIcons from 'react-native-vector-icons/EvilIcons';
 import { useSelector, useDispatch } from 'react-redux';
 import styles from './styles';
 import { useNavigation } from '@react-navigation/native';
+import LinearGradient from 'react-native-linear-gradient';
 
 const UserProfileScreen = () => {
   const dispatch = useDispatch();
@@ -51,41 +52,64 @@ const UserProfileScreen = () => {
 
   return (
     <View style={styles.container}>
-      <View style={styles.headerpart}>
+      <LinearGradient style={styles.headerpart}
+        colors={['#7070d9', '#24a1c9']}
+        start={{ x: 1, y: 0 }}
+        end={{ x: 0, y: 1 }}
+      >
         <EvilIcons name="user" size={65} color={'white'} style={styles.icon} />
         <Text style={styles.buttonText}>{username}</Text>
+      </LinearGradient>
+      <View style={styles.information}>
+        <Text style={styles.label}>Name:</Text>
+        <TextInput
+          style={styles.input}
+          value={name}
+          onChangeText={(text) => setName(text)}
+          editable={isEditing}
+        />
+
+        <Text style={styles.label}>{label ? 'Phone Number:' : 'E-mail:'}</Text>
+        <TextInput
+          style={styles.input}
+          value={phoneNumber}
+          onChangeText={(text) => setPhoneNumber(text)}
+          editable={isEditing}
+        />
+
+        {isEditing ? (
+          <LinearGradient style={styles.button}
+            colors={['#7070d9', '#24a1c9']}
+            start={{ x: 1, y: 0 }}
+            end={{ x: 0, y: 1 }}
+          >
+            <TouchableOpacity onPress={handleSavePress}>
+              <Text style={styles.buttonText}>Save</Text>
+            </TouchableOpacity>
+          </LinearGradient>
+        ) : (
+          <>
+            <LinearGradient style={styles.button}
+              colors={['#7070d9', '#24a1c9']}
+              start={{ x: 1, y: 0 }}
+              end={{ x: 0, y: 1 }}
+            >
+              <TouchableOpacity onPress={handleEditPress}>
+                <Text style={styles.buttonText}>Edit</Text>
+              </TouchableOpacity>
+            </LinearGradient>
+            <LinearGradient style={styles.button}
+              colors={['#7070d9', '#24a1c9']}
+              start={{ x: 1, y: 0 }}
+              end={{ x: 0, y: 1 }}
+            >
+              <TouchableOpacity onPress={handleLogoutPress}>
+                <Text style={styles.buttonText}>Logout</Text>
+              </TouchableOpacity>
+            </LinearGradient>
+          </>
+        )}
       </View>
-      <Text style={styles.label}>Name:</Text>
-      <TextInput
-        style={styles.input}
-        value={name}
-        onChangeText={(text) => setName(text)}
-        editable={isEditing}
-      />
-
-      <Text style={styles.label}>{label ? 'Phone Number:' : 'E-mail:'}</Text>
-      <TextInput
-        style={styles.input}
-        value={phoneNumber}
-        onChangeText={(text) => setPhoneNumber(text)}
-        editable={isEditing}
-      />
-
-      {isEditing ? (
-        <TouchableOpacity style={styles.button} onPress={handleSavePress}>
-          <Text style={styles.buttonText}>Save</Text>
-        </TouchableOpacity>
-      ) : (
-        <>
-          <TouchableOpacity style={styles.button} onPress={handleEditPress}>
-            <Text style={styles.buttonText}>Edit</Text>
-          </TouchableOpacity>
-          <TouchableOpacity style={styles.button} onPress={handleLogoutPress}>
-            <Text style={styles.buttonText}>Logout</Text>
-          </TouchableOpacity>
-        </>
-      )}
-
       <Modal
         animationType="slide"
         transparent={true}
@@ -96,12 +120,24 @@ const UserProfileScreen = () => {
           <View style={styles.modalContent}>
             <Text style={styles.modalText}>Are you sure you want to logout?</Text>
             <View style={styles.modalButtons}>
-              <TouchableOpacity onPress={() => setLogoutModalVisible(false)} style = {styles.alertnuttons}>
-                <Text style={styles.modalButtonText}>Close</Text>
-              </TouchableOpacity>
-              <TouchableOpacity onPress={handleLogout} style = {styles.alertnuttons}>
-                <Text style={styles.modalButtonText}>Logout</Text>
-              </TouchableOpacity>
+              <LinearGradient style={styles.alertnuttons}
+                colors={['#7070d9', '#24a1c9']}
+                start={{ x: 1, y: 0 }}
+                end={{ x: 0, y: 1 }}
+              >
+                <TouchableOpacity onPress={() => setLogoutModalVisible(false)}>
+                  <Text style={styles.modalButtonText}>Close</Text>
+                </TouchableOpacity>
+              </LinearGradient>
+              <LinearGradient style={styles.alertnuttons}
+                colors={['#7070d9', '#24a1c9']}
+                start={{ x: 1, y: 0 }}
+                end={{ x: 0, y: 1 }}
+              >
+                <TouchableOpacity onPress={handleLogout}>
+                  <Text style={styles.modalButtonText}>Logout</Text>
+                </TouchableOpacity>
+              </LinearGradient>
             </View>
           </View>
         </View>

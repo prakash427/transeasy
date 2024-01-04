@@ -1,15 +1,19 @@
 
-import React,{useState, useEffect} from 'react';
+import React, { useState, useEffect } from 'react';
 import { View, Text, TextInput, TouchableOpacity, Image } from 'react-native';
 import styles from './styles';
 import EvilIcons from 'react-native-vector-icons/EvilIcons';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
+import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons'
+import FontAwesome from 'react-native-vector-icons/FontAwesome';
+import FontAwesome6 from 'react-native-vector-icons/FontAwesome6';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 
 const ProductReceiverDetails = ({
-  productIndex,  
+  productIndex,
   product,
   setProduct,
+  additionalStyle,
   validateInputs,
   productName,
   setProductName,
@@ -29,89 +33,118 @@ const ProductReceiverDetails = ({
   selectedImages,
   onDeleteProduct,
 }) => {
-    const heading = `Product ${productIndex + 1}`;  
+  const heading = `Product ${productIndex + 1}`;
 
 
-return(
-  <View style={styles.sectionContainer}>
-    <View style={styles.headingContainer}>
+  return (
+    <View style={[styles.sectionContainer, additionalStyle]}>
+      <View style={styles.row}>
         <Text style={styles.subHeading}>{heading}</Text>
-        {productIndex !== 0 ?<TouchableOpacity onPress={() => onDeleteProduct(productIndex)}>
+        {productIndex !== 0 ? <TouchableOpacity onPress={() => onDeleteProduct(productIndex)}>
           <MaterialIcons name="delete" size={24} color="red" />
-        </TouchableOpacity> :null}
+        </TouchableOpacity> : null}
       </View>
-    <TextInput
-      style={styles.inputField}
-      placeholder="Product Name"
-      value={product?.productName || ''}
-      onChangeText={(text) => {
-        setProduct({ ...product, productName: text });
-      }}
-      onFocus={() => console.log('TextInput focused')}
-    />
-    {renderError('productName', productIndex)}
+      <View style={styles.columnContainer}>
+        <View style={styles.rowContainer}>
+          <View style={styles.inputWithIcon}>
+            <MaterialCommunityIcons name='cart-arrow-up' size={20} color="#24a1c9" style={styles.icon} />
+            <TextInput
+              style={styles.inputField}
+              placeholder="Product"
+              value={product?.productName || ''}
+              onChangeText={(text) => {
+                setProduct({ ...product, productName: text });
+              }}
+              onFocus={() => console.log('TextInput focused')}
+            />
+          </View>
+          {renderError('productName', productIndex)}
+        </View>
 
-    <TextInput
-      style={styles.inputField}
-      placeholder="Dimensions"
-      value={product.dimensions}
-      onChangeText={(text) => setProduct({ ...product, dimensions: text, selectedImage })}
+        <View style={styles.rowContainer}>
 
-    />
-    {renderError('dimensions',productIndex)}
+          <View style={styles.inputWithIcon}>
+            <FontAwesome name='cubes' size={20} color="#24a1c9" style={styles.icon} />
+            <TextInput
+              style={styles.inputField}
+              placeholder="Dimension"
+              value={product.dimensions}
+              onChangeText={(text) => setProduct({ ...product, dimensions: text, selectedImage })}
+            />
+          </View>
+          {renderError('dimensions', productIndex)}
+        </View>
+      </View>
+      <Text style={styles.subHeading}>Receiver </Text>
+      <View style={styles.columnContainer}>
+        <View style={styles.rowContainer}>
+          <View style={styles.inputWithIcon}>
+            <FontAwesome6 name='house-user' size={20} color="#24a1c9" style={styles.icon} />
+            <TextInput
+              style={styles.inputField}
+              placeholder="Name"
+              value={product.receiverName}
+              onChangeText={(text) => setProduct({ ...product, receiverName: text })}
+            />
+          </View>
+          {renderError('receiverName', productIndex)}
+        </View>
 
-    <View>
-      <View style={styles.back}>
-        <TouchableOpacity onPress={openGallery} style={styles.button}>
-          <Text style={styles.buttonText}>Gallery</Text>
-          <MaterialIcons name="photo-library" size={30} color={'white'} />
-        </TouchableOpacity>
-        <TouchableOpacity onPress={openCamera} style={styles.button}>
-          <Text style={styles.buttonText}>Camera</Text>
-          <MaterialIcons name="photo-camera" size={30} color={'white'} />
+        <View style={styles.rowContainer}>
+
+          <View style={styles.inputWithIcon}>
+            <FontAwesome6 name='mobile-screen-button' size={23} color="#24a1c9" style={styles.icon} />
+            <TextInput
+              style={styles.inputField}
+              placeholder="Mobile"
+              value={product.mobileNumber}
+              onChangeText={(text) => setProduct({ ...product, mobileNumber: text })}
+              keyboardType="number-pad"
+            />
+          </View>
+          {renderError('mobileNumber', productIndex)}
+        </View>
+      </View>
+      <View style={styles.inputWithIcon}>
+        <FontAwesome6 name='address-card' size={20} color="#24a1c9" style={styles.icon} />
+        <TextInput
+          style={styles.inputField}
+          placeholder="Address"
+          value={product.address}
+          onChangeText={(text) => setProduct({ ...product, address: text })}
+        />
+      </View>
+      {renderError('address', productIndex)}
+      <Text style={styles.subHeading}>Upload Photo</Text>
+      <View>
+        <View style={styles.columnContainer}>
+          <TouchableOpacity onPress={openGallery} style={styles.button}>
+            <MaterialIcons name="photo-library" size={30} color='#24a1c9' />
+            <Text style={styles.buttonText}>Gallery</Text>
+          </TouchableOpacity>
+          <TouchableOpacity onPress={openCamera} style={styles.button}>
+            <MaterialIcons name="photo-camera" size={30} color='#24a1c9' />
+            <Text style={styles.buttonText}>Camera</Text>
+          </TouchableOpacity>
+        </View>
+        <TouchableOpacity style={styles.imageplace}>
+          <View style={styles.imageRow}>
+            {selectedImages[productIndex] && selectedImages[productIndex].length > 0 ? (
+              selectedImages[productIndex]?.map((image, index) => (
+                <View key={index} style={styles.imageContainer}>
+                  <TouchableOpacity onPress={() => removeImage(productIndex, index)} style={styles.removeImageButton}>
+                    <Icon name="close" size={20} color="white" />
+                  </TouchableOpacity>
+                  <Image source={{ uri: image.uri }} style={styles.selectedImage} />
+                </View>
+              ))
+            ) : null}
+          </View>
         </TouchableOpacity>
       </View>
-      <TouchableOpacity style={styles.imageplace}>
-         {selectedImage && selectedImage.isVisible ? (
-            <View>
-              <TouchableOpacity onPress={removeImage} style={styles.removeImageButton}>
-                <Icon name="close" size={20} color="white" />
-              </TouchableOpacity>
-              <Image source={{uri: selectedImages[productIndex]?.uri}} style={styles.selectedImage} />
-            </View>
-          ) : null}
-      </TouchableOpacity>
+      {renderError('image', productIndex)}
     </View>
-    {renderError('image',productIndex)}
-
-    <Text style={styles.subHeading}>Receiver Details</Text>
-
-    <TextInput
-      style={styles.inputField}
-      placeholder="Receiver Name"
-      value={product.receiverName}
-      onChangeText={(text) => setProduct({ ...product, receiverName: text })}
-    />
-     {renderError('receiverName',productIndex)}
-
-    <TextInput
-      style={styles.inputField}
-      placeholder="Mobile Number"
-      value={product.mobileNumber}
-      onChangeText={(text) => setProduct({ ...product, mobileNumber: text })}
-      keyboardType="number-pad"
-    />
-    {renderError('mobileNumber',productIndex)}
-
-    <TextInput
-      style={styles.inputField}
-      placeholder="Address"
-      value={product.address}
-      onChangeText={(text) => setProduct({ ...product, address: text })}
-    />
-    {renderError('address',productIndex)}
-  </View>
-);
-        }
+  );
+}
 
 export default ProductReceiverDetails;

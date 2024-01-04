@@ -23,22 +23,22 @@ const Stack = createStackNavigator();
 const StackNavigator = () => {
   return (
     <Stack.Navigator initialRouteName="SplashScreenn">
-           <Stack.Screen name="SplashScreenn" component={SplashScreenn} options={{ headerShown: false }} />
-          <Stack.Screen name="BackgroundVideo" component={BackgroundVideo} options={{ headerShown: false }}/>
-          <Stack.Screen name="UserDetailsScreen" component={UserDetailsScreen} options={{ headerShown: false }}/>
-          <Stack.Screen name="OTPScreen" component={OTPScreen} options={{ headerShown: false }}/>
-          <Stack.Screen name="HomeScreen" component={HomeScreen} options={{ headerShown: false }}/> 
-          <Stack.Screen name="UserProfileScreen" component={UserProfileScreen} options={{ headerShown: false }}/>
-          <Stack.Screen name="ExportScreen" component={ExportScreen} options={{ headerShown: false }}/>
-          <Stack.Screen name="Transportslist" component={Transportslist} options={{ headerShown: false }}/>
-          <Stack.Screen name="ImportScreen" component={ImportScreen} options={{ headerShown: false }}/>
-          <Stack.Screen name="ItemDetailsScreen" component={ItemDetailsScreen} options={{headerShown:false}}/>
-          <Stack.Screen name="Paymentslist" component={Paymentslist} options={{headerShown:false}}/>
-          <Stack.Screen name="Wallet" component={Wallet} options={{headerShown:false}}/>
-          <Stack.Screen name="ChatScreen" component={ChatScreen} options={{headerShown:false}}/>
-          <Stack.Screen name="Myearnings" component={Myearnings} options={{headerShown:false}}/>
-          <Stack.Screen name="History" component={History} options={{headerShown:false}}/>
-          <Stack.Screen name="Applycoupon" component={Applycoupon} options={{headerShown:false}}/>
+      <Stack.Screen name="SplashScreenn" component={SplashScreenn} options={{ headerShown: false }} />
+      <Stack.Screen name="BackgroundVideo" component={BackgroundVideo} options={{ headerShown: false }} />
+      <Stack.Screen name="UserDetailsScreen" component={UserDetailsScreen} options={{ headerShown: false }} />
+      <Stack.Screen name="OTPScreen" component={OTPScreen} options={{ headerShown: false }} />
+      <Stack.Screen name="HomeScreen" component={HomeScreen} options={{ headerShown: false }} />
+      <Stack.Screen name="UserProfileScreen" component={UserProfileScreen} options={{ headerShown: false }} />
+      <Stack.Screen name="ExportScreen" component={ExportScreen} options={{ headerShown: false }} />
+      <Stack.Screen name="Transportslist" component={Transportslist} options={{ headerShown: false }} />
+      <Stack.Screen name="ImportScreen" component={ImportScreen} options={{ headerShown: false }} />
+      <Stack.Screen name="ItemDetailsScreen" component={ItemDetailsScreen} options={{ headerShown: false }} />
+      <Stack.Screen name="Paymentslist" component={Paymentslist} options={{ headerShown: false }} />
+      <Stack.Screen name="Wallet" component={Wallet} options={{ headerShown: false }} />
+      <Stack.Screen name="ChatScreen" component={ChatScreen} options={{ headerShown: false }} />
+      <Stack.Screen name="Myearnings" component={Myearnings} options={{ headerShown: false }} />
+      <Stack.Screen name="History" component={History} options={{ headerShown: false }} />
+      <Stack.Screen name="Applycoupon" component={Applycoupon} options={{ headerShown: false }} />
     </Stack.Navigator>
   );
 };
