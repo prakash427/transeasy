@@ -108,6 +108,10 @@ const styles = StyleSheet.create({
     backgroundColor: 'transparent',
     borderWidth: 0,
   },
+  errorText: {
+    color: 'red',
+    paddingLeft: 20
+  },
 
 });
 

@@ -15,14 +15,22 @@ const ExportScreen = () => {
   const dispatch = useDispatch();
   const navigation = useNavigation();
   const [sections, setSections] = useState([{}]);
+  const statesList = ["Andhra Pradesh", "Telangana", "Karnataka"];
+  const citiesList = {
+    "Andhra Pradesh": ["Vijayawada", "Vizag", "Rajahmundry"],
+    Telangana: ["Hyderabad", "Zheerabad", "Medchal"],
+    Karnataka: ["Bengaluru", "Mangaluru", "Kalaburagi"],
+  };
   const [products, setProducts] = useState([
-    { productName: '', dimensions: '', receiverName: '', mobileNumber: '', address: '', selectedImage: null },
+    { productName: '', dimensions: '', receiverName: '', mobileNumber: '', state: '', city : '', selectedImage: null },
   ]);
   const [productName, setProductName] = useState('');
   const [dimensions, setDimensions] = useState('');
   const [receiverName, setReceiverName] = useState('');
   const [mobileNumber, setMobileNumber] = useState('');
   const [address, setAddress] = useState('');
+  const [state, setState] = useState('');
+  const [city, setCity] = useState('');
   const [selectedImage, setSelectedImage] = useState(null);
   const [selectedJourneyIcon, setSelectedJourneyIcon] = useState('Bike');
   const [selectedImages, setSelectedImages] = useState(Array(products.length).fill([]));
@@ -34,7 +42,8 @@ const ExportScreen = () => {
     dimensions: '',
     receiverName: '',
     mobileNumber: '',
-    address: '',
+    state: '',
+    city : '',
     image: ''
   });
   const journeyIcons = [
@@ -55,7 +64,7 @@ const ExportScreen = () => {
 
   const addProduct = () => {
     setSections([...sections, {}]);
-    setProducts([...products, { productName: '', dimensions: '', receiverName: '', mobileNumber: '', address: '' }]);
+    setProducts([...products, { productName: '', dimensions: '', receiverName: '', mobileNumber: '', state: '', city: '' }]);
     setSelectedImages([...selectedImages, []]);
   };
 
@@ -172,22 +181,26 @@ const ExportScreen = () => {
       });
     }
   };
-
-
-
-
   const validateInputs = () => {
     const newErrors = products.map((product) => {
+      const dimensionPattern = /^\d+\*\d+$/;
+      const namePattern = /^[a-zA-Z\s]*$/;
+      const phonePattern = /^\d{10}$/;
+
       console.log('Product:', product);
       console.log('Selected Image:', product.selectedImage);
       console.log('Selected Image URI:', product.selectedImage && product.selectedImage.uri);
-
       return {
-        productName: product.productName.trim() ? '' : 'Product Name is required',
-        dimensions: product.dimensions.trim() ? '' : 'Dimensions are required',
-        receiverName: product.receiverName.trim() ? '' : 'Receiver Name is required',
-        mobileNumber: product.mobileNumber.trim() ? '' : 'Mobile Number is required',
-        address: product.address.trim() ? '' : 'Address is required',
+        productName: (product.productName.trim() && namePattern.test(product.productName.trim())) ? '' : 
+        (product.productName.trim() ? 'Product Name should only contain letters' : 'Product Name is required'),
+        dimensions: (product.dimensions.trim() && dimensionPattern.test(product.dimensions.trim())) ? '' : 
+        (product.dimensions.trim() ? 'Please enter valid dimensions (e.g., 6*8)' : 'Dimensions are required'),
+        receiverName : (product.receiverName.trim() && namePattern.test(product.receiverName.trim())) ? '' :
+        (product.receiverName.trim()?'please enter valid Receiver Name' : 'Receiver Name is required'),
+        mobileNumber : (product.mobileNumber.trim() && phonePattern.test(product.mobileNumber.trim())) ? '':
+        (product.mobileNumber.trim()?'please enter valid Mobile Number' : 'Mobile NUmber is required'),
+        state : product.state.trim()? '' : 'state is required',
+        city : product.city.trim()? '' : 'city is required',
         image: product.selectedImage ? '' : 'Image is required',
       }
     });
@@ -244,8 +257,12 @@ const ExportScreen = () => {
             setReceiverName={setReceiverName}
             mobileNumber={mobileNumber}
             setMobileNumber={setMobileNumber}
-            address={address}
-            setAddress={setAddress}
+            state = {state}
+            setState = {setState}
+            city = {city}
+            setCity = {setCity}
+            statesList = {statesList}
+            citiesList = {citiesList}
             openGallery={() => openGallery(index)}
             openCamera={() => openCamera(index)}
             removeImage={() => removeImage(index)}

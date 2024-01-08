@@ -7,8 +7,6 @@ import LinearGradient from 'react-native-linear-gradient';
 import CustomLinearGradient from '../customlineargradient/lineargradient';
 import styles from './styles';
 
-
-
 const ImportScreen = () => {
   const [receiverName, setReceiverName] = useState('');
   const [mobileNumber, setMobileNumber] = useState('');
@@ -22,9 +20,38 @@ const ImportScreen = () => {
     { title: 'Van', icon: 'van-utility' },
   ];
 
+  const [errors, setErrors] = useState({
+    receiverName: '',
+    mobileNumber: '',
+    id: ''
+  });
 
+  const renderError = (field) => {
+    const productErrors = errors;
+    if (productErrors && productErrors[field]) {
+      const errorMessage = productErrors[field];
+      return <Text style={styles.errorText}>{errorMessage}</Text>;
+    }
+    return null;
+  };
+
+  const validateInputs = () => {
+    const newErrors = (() => {
+      const namePattern = /^[a-zA-Z\s]*$/;
+      const phonePattern = /^\d{10}$/;
+      const idPattern = /^\d{6}$/;
+      return {
+        receiverName : (receiverName.trim() && namePattern.test(receiverName.trim())) ? '' :
+        (receiverName.trim()?'please enter valid Receiver Name' : 'Receiver Name is required'),
+        mobileNumber : (mobileNumber.trim() && phonePattern.test(mobileNumber.trim())) ? '':
+        (mobileNumber.trim()?'please enter valid Mobile Number' : 'Mobile NUmber is required'),
+        id : (id.trim() && idPattern.test(id.trim()))?'':
+        (id.trim()?'please enter valid id' : 'Id is required')
+      }
+    });
+    setErrors(newErrors);
+  };
   const renderJourneyIcon = item => {
-
     const imageMapping = {
       Bike: require('../assets/bike.jpg'),
       Auto: require('../assets/auto.jpg'),
@@ -49,21 +76,6 @@ const ImportScreen = () => {
       </TouchableOpacity>
     )
   };
-  const validateInputs = () => {
-    if (!receiverName.trim() || !mobileNumber.trim() || !id.trim || !selectedJourneyIcon) {
-      Alert.alert('Validation Error', 'Please fill in all fields and select a journey icon.');
-      return false;
-    }
-    return true;
-  };
-  const confirmLocation = () => {
-    if (validateInputs()) {
-      console.log('Location confirmed!');
-    }
-
-    console.log('Location confirmed!');
-  };
-
   return (
     <>
       <ScrollView>
@@ -81,17 +93,15 @@ const ImportScreen = () => {
               <Text style={styles.Headertext}>Go Back</Text>
             </View>
           </LinearGradient>
-
           <View style={styles.sectionContainer}>
             <Text style={styles.subHeading}>Receiver Details</Text>
-
             <TextInput
               style={styles.inputField}
               placeholder="Receiver Name"
               value={receiverName}
               onChangeText={(text) => setReceiverName(text)}
             />
-
+              {renderError('receiverName')}
             <TextInput
               style={styles.inputField}
               placeholder="Mobile Number"
@@ -99,7 +109,7 @@ const ImportScreen = () => {
               onChangeText={(text) => setMobileNumber(text)}
               keyboardType='number-pad'
             />
-
+             {renderError('mobileNumber')}
             <TextInput
               style={styles.inputField}
               placeholder='ID'
@@ -107,6 +117,7 @@ const ImportScreen = () => {
               onChangeText={(Number) => setId(Number)}
               keyboardType='number-pad'
             />
+             {renderError('id')}
             <Text style={styles.subHeading}>Select Vehicle</Text>
             <View style={styles.journeyIconsContainer}>
               {journeyIcons.map(renderJourneyIcon)}
@@ -120,7 +131,7 @@ const ImportScreen = () => {
         start={{ x: 1, y: 0 }}
         end={{ x: 0, y: 1 }}
       >
-        <TouchableOpacity onPress={confirmLocation}>
+        <TouchableOpacity onPress={validateInputs}>
           <Text style={styles.buttonText}>Confirm Location</Text>
         </TouchableOpacity>
       </LinearGradient>

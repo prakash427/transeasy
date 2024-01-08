@@ -73,8 +73,18 @@ const styles = StyleSheet.create({
     marginBottom: 10,
     borderRadius: 10,
     marginRight: 10,
-    paddingHorizontal: 40
+    paddingHorizontal: 40,
   },
+  dropdownField : {
+    width: width * 0.4,
+  },
+  dropdownContainer: {
+    width: '100%',
+    overflow: 'hidden',
+    borderRadius: 8,
+    borderColor: '#d3d3d3',
+    borderWidth: 1
+  },  
   productImage: {
     width: '100%',
     height: 200,

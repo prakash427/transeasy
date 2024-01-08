@@ -1,6 +1,7 @@
 
 import React, { useState, useEffect } from 'react';
-import { View, Text, TextInput, TouchableOpacity, Image } from 'react-native';
+import { View, Text, TextInput, TouchableOpacity, Image} from 'react-native';
+import { Picker } from '@react-native-picker/picker';
 import styles from './styles';
 import EvilIcons from 'react-native-vector-icons/EvilIcons';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
@@ -25,6 +26,10 @@ const ProductReceiverDetails = ({
   setMobileNumber,
   address,
   setAddress,
+  state,
+  setState,
+  city,
+  setCity,
   renderError,
   openGallery,
   openCamera,
@@ -32,6 +37,8 @@ const ProductReceiverDetails = ({
   selectedImage,
   selectedImages,
   onDeleteProduct,
+  statesList,
+  citiesList,
 }) => {
   const heading = `Product ${productIndex + 1}`;
 
@@ -105,16 +112,52 @@ const ProductReceiverDetails = ({
           {renderError('mobileNumber', productIndex)}
         </View>
       </View>
-      <View style={styles.inputWithIcon}>
-        <FontAwesome6 name='address-card' size={20} color="#24a1c9" style={styles.icon} />
-        <TextInput
-          style={styles.inputField}
-          placeholder="Address"
-          value={product.address}
-          onChangeText={(text) => setProduct({ ...product, address: text })}
-        />
+      <Text style={styles.subHeading}>Address</Text>
+      <View style={styles.columnContainer}>
+        <View style={styles.rowContainer}>
+          <View style={styles.inputWithIcon}>
+          <View style={styles.dropdownContainer}>
+            <Picker
+              style={styles.dropdownField}
+              selectedValue={product.state}
+              onValueChange={(itemValue) => {setProduct({...product, state : itemValue});
+              setCity('');
+            }}
+            >
+              <Picker.Item label="State" value="" color='black'/>
+              {statesList.map((state) => (
+                <Picker.Item key={state} label={state} value={state} color='black'/>
+              ))}
+            </Picker>
+            </View>
+          </View>
+          {renderError('state', productIndex)}
+        </View>
+
+        <View style={styles.rowContainer}>
+
+          <View style={styles.inputWithIcon}>
+          <View style={styles.dropdownContainer}>
+            <Picker
+              style={styles.dropdownField}
+              selectedValue={product.city}
+              onValueChange={(itemValue) => {setProduct({...product,city : itemValue});
+              console.log('city',setCity)
+              }}
+              enabled={product.state!== ''}
+            >
+              <Picker.Item label="City" value="" color='black'/>
+              {product.state && citiesList[product.state] ? (
+                citiesList[product.state].map((city) => (
+                  <Picker.Item key={city} label={city} value={city} color='black'/>
+                ))
+              ) : null}
+            </Picker>
+            </View>
+          </View>
+          {renderError('city', productIndex)}
+        </View>
       </View>
-      {renderError('address', productIndex)}
       <Text style={styles.subHeading}>Upload Photo</Text>
       <View>
         <View style={styles.columnContainer}>
